@@ -89,6 +89,33 @@ class Univexp(Thread) :
         self.file_1.write("/")
 
 
+    def ordonne(self) :
+
+        # xp = [0] * (self.ilast - self.ifirst+1)
+        
+
+        #vp = [0] * (self.ilast - self.ifirst+1)
+
+        for i in range(self.ifirst+1,self.ilast) :
+
+            xp = self.x[i]
+            vp = self.v[i]
+            np = self.name[i]
+
+            while(j != 1.0 and self.x[i] < self.x[j-1]) :
+                j = j-1
+            for k in range(j+1,i) :
+                self.x[k] = self.x[k-1]
+                self.v[k] = self.v[k-1]
+                self.name[k] = self.name[k-1]
+
+            self.x[j] = xp
+            self.v[j] = vp
+            self.name[j] = np
+
+
+
+
 
 def main() :
     univ = Univexp(10000)
