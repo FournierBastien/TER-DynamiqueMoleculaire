@@ -51,13 +51,16 @@ class univexp:
 		
 		for i in range(self.ifirst, self.ilast+1):
 			E=a[i]
-			AA=(self.x[i]+E-r2*self.v[i])*math.exp(r2*self.dti)
+			AA=(self.x[i]+E+r2*self.v[i])*math.exp(r2*self.dti)
 			BB=2.0*(self.x[i]+E-self.v[i]/r2)*math.exp(-self.dti/r2)
 			self.x[i]=((AA+BB)*tier)-E
 			self.v[i]=(AA*r2-BB/r2)*tier
 			if(self.x[i]>self.x[self.m-1]):
 				self.epolar+=1
 				self.x[i]=self.x[1]+self.x[i]-self.x[self.m-1]
+			if(self.x[i]<self.x[0]):
+				self.epolar-=1
+				self.x[i]=self.x[self.m-1]+self.x[i]-self.x[0]
 		
 	def ordonne(self):
 		j=0
