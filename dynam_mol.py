@@ -5,9 +5,7 @@ import random
 
 
 class Univexp :
-    fichier ="uniexp01"
-    tecr=0.0
-    tsor=0.0
+    fichier ="univexp01"
     n=10000
 
     def __init__(self) :
