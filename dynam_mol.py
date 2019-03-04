@@ -114,10 +114,10 @@ class Univexp :
 
     def wbande(self) :
         print(" enregistrement à tecr= ", self.tecr)
-        self.file_1.write("#  %s  %s  %s  %s  %s" %(self.m ,self.n,self.ifirst,self.ilast,self.tecr))
+        self.file_1.write("#  %s  %s  %s  %s  %s\n" %(self.m ,self.n,self.ifirst,self.ilast,self.tecr))
 
         for i in range(self.ifirst,self.ilast) :
-            self.file_1.write(" %s  %s  %s" %(self.x[i],self.v[i],self.name[i]))
+            self.file_1.write(" %s  %s  %s\n" %(self.x[i],self.v[i],self.name[i]))
         
         self.file_1.write("\n")
 
