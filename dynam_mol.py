@@ -119,7 +119,7 @@ class Univexp :
         for i in range(self.ifirst,self.ilast) :
             self.file_1.write(" %s  %s  %s" %(self.x[i],self.v[i],self.name[i]))
         
-        self.file_1.write("/")
+        self.file_1.write("\n")
 
   
     def ordonne(self) :
