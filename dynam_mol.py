@@ -126,7 +126,7 @@ class Univexp :
         j=0
 	xp=0.0
 	vp=0.0
-        for i in range(self.ifirst+1,self.ilast) :
+        for i in range(self.ifirst+1,self.ilast+1) :
             j=i
             xp = self.x[i]
             vp = self.v[i]
