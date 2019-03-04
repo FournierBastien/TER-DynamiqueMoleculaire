@@ -65,7 +65,7 @@ class Univexp :
         # initialisation des particules
         
         for i in range(self.ifirst,self.ilast+1) :
-            #self.name[i] = i-1
+            self.name[i] = i-1
             self.x[i] = self.x[1] + 0.5+i-(self.ifirst+1)
             self.v[i] = 2.0 * self.pvit * (0.5 - random.random())
             self.mi[i] = 1.0
