@@ -93,15 +93,23 @@ class Univexp(Thread) :
 
 
     def wbande(self) :
-        print(" enregistrement à tecr= " + str(self.tecr))
-        self.file_1.write("# " + str(self.m) + " " + str(self.n) + " " + str(self.ifirst) + " " + str(self.ilast) + " " + str(self.tecr))
+        # print(" enregistrement à tecr= " + str(self.tecr))
+        # self.file_1.write("# " + str(self.m) + " " + str(self.n) + " " + str(self.ifirst) + " " + str(self.ilast) + " " + str(self.tecr))
 
-        for i in range(self.ifirst,self.ilast) :
-            self.file_1.write(" " + str(self.x[i]) + " " + str(self.v[i]) + " " + str(self.names[i]))
+        # for i in range(self.ifirst,self.ilast) :
+        #     self.file_1.write(" " + str(self.x[i]) + " " + str(self.v[i]) + " " + str(self.names[i]))
         
+        # self.file_1.write("\n")
+
+        print("enregistrement a tecr={:7.3f}".format(self.tecr))
+		
+        self.file_1.write(("#{:5d} {:5d} {:5d} {:5d} {:7.3f}\n").format(self.m, self.n, self.ifirst, self.ilast, self.tecr))
+        for i in range(self.ifirst, self.ilast):
+            self.file_1.write(("{} {} {}\n".format(self.x[i],self.v[i],self.names[i])))
         self.file_1.write("\n")
 
 
+    # blocage dans ordonne, indice out of range ?
     def ordonne(self) :
 
         # xp = [0] * (self.ilast - self.ifirst+1)
