@@ -1,7 +1,9 @@
-from threading import Thread
+from threading import Thread, RLock
 import random
 import math
+import time
 
+verrou = RLock()
 
 class Univexp(Thread) :
 
@@ -9,7 +11,7 @@ class Univexp(Thread) :
 
         Thread.__init__(self)
         self.n = n
-        self.fichier = "univexp01"
+        self.fichier = "univexp03"
 
         self.file_1 = None
         self.file_2 = None
@@ -111,23 +113,18 @@ class Univexp(Thread) :
 
     # blocage dans ordonne, indice out of range ?
     def ordonne(self) :
-
         # xp = [0] * (self.ilast - self.ifirst+1)
-        
-
         #vp = [0] * (self.ilast - self.ifirst+1)
 
-        j = 0
-
         for i in range(self.ifirst+1,self.ilast) :
-
+            j = i
             xp = self.x[i]
             vp = self.v[i]
             np = self.names[i]
 
             while(j != 1.0 and self.x[i] < self.x[j-1]) :
                 j = j-1
-            for k in range(j+1,i) :
+            for k in range(i,j+1,-1) :
                 self.x[k] = self.x[k-1]
                 self.v[k] = self.v[k-1]
                 self.names[k] = self.names[k-1]
@@ -140,12 +137,13 @@ class Univexp(Thread) :
         
         AA = 0.0
         BB = 0.0
+        E = 0.0
 
         r2 = -math.sqrt(2.0)
         tier = 1.0/3.0
 
         a = [0] * self.m
-
+        
         # calcul de l'accélération
         eav = self.epolar + 0.5 * self.n
         for i in range(self.ifirst,self.ilast) :
@@ -157,21 +155,23 @@ class Univexp(Thread) :
         for i in range(self.ifirst,self.ilast) :
             E = a[i]
             AA = (self.x[i] + E + r2 * self.v[i]) * math.exp(r2 * self.dti)
-            BB = 2.0 * (self.x[i] + E - self.v[i] / r2) * math.exp(r2*self.dti)
+            BB = 2.0 * (self.x[i] + E - self.v[i] / r2) * math.exp(-self.dti/r2)
             self.x[i] = ((AA + BB) * tier) - E
             self.v[i] = (AA * r2 - BB / r2) * tier
 
             if(self.x[i] > self.x[self.m-1]) :
                 self.epolar = self.epolar + 1
-                self.x[i] = self.x[1] + self.x[i] - self.x[self.m-1]
-            if(self.x[i] < self.x[i]) :
+                self.x[i] = self.x[0] + self.x[i] - self.x[self.m-1]
+            if(self.x[i] < self.x[0]) :
                 self.epolar = self.epolar - 1
-                self.x[i] = self.x[self.m] + self.x[i] - self.x[1]
+                self.x[i] = self.x[self.m-1] + self.x[i] - self.x[0]
 
 
 def main() :
-    univ = Univexp(10000)
-
+    debut = time.time()
+    univ = Univexp(10)
+    fin = time.time()
+    print("Temps écoulé : "+str((fin - debut))*60 + " minutes !")
 
 main()
 exit()
