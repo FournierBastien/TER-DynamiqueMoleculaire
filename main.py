@@ -53,7 +53,7 @@ class Univexp(Thread) :
 
         # initialisation des particules
         
-        for i in range(self.ifirst,self.ilast):
+        for i in range(self.ifirst,self.ilast+1):
             self.names[i] = i-1
             self.x[i] = self.x[1] + 0.5+i-self.ifirst
             self.v[i] = 2.0 * self.pvit * (0.5 - random.random())
@@ -64,7 +64,7 @@ class Univexp(Thread) :
 
         vmoy = sum(self.v[self.ifirst:self.ilast]) / self.n
 
-        for i in range(self.ifirst,self.ilast) :
+        for i in range(self.ifirst,self.ilast+1) :
             self.v[i] = self.v[i] - vmoy
         vmoy = sum(self.v[self.ifirst:self.ilast])
         print(" vmoyen = " + str(vmoy))
@@ -106,7 +106,7 @@ class Univexp(Thread) :
         print("enregistrement a tecr={:7.3f}".format(self.tecr))
 		
         self.file_1.write(("#{:5d} {:5d} {:5d} {:5d} {:7.3f}\n").format(self.m, self.n, self.ifirst, self.ilast, self.tecr))
-        for i in range(self.ifirst, self.ilast):
+        for i in range(self.ifirst, self.ilast+1):
             self.file_1.write(("{} {} {}\n".format(self.x[i],self.v[i],self.names[i])))
         self.file_1.write("\n")
 
@@ -116,7 +116,7 @@ class Univexp(Thread) :
         # xp = [0] * (self.ilast - self.ifirst+1)
         #vp = [0] * (self.ilast - self.ifirst+1)
 
-        for i in range(self.ifirst+1,self.ilast) :
+        for i in range(self.ifirst+1,self.ilast+1) :
             j = i
             xp = self.x[i]
             vp = self.v[i]
@@ -146,13 +146,13 @@ class Univexp(Thread) :
         
         # calcul de l'accélération
         eav = self.epolar + 0.5 * self.n
-        for i in range(self.ifirst,self.ilast) :
+        for i in range(self.ifirst,self.ilast+1) :
             eap = eav - 1
             a[i] = 0.5 * (eav+eap)
             eav = eap
         # les particules avances de dti
 
-        for i in range(self.ifirst,self.ilast) :
+        for i in range(self.ifirst,self.ilast+1) :
             E = a[i]
             AA = (self.x[i] + E + r2 * self.v[i]) * math.exp(r2 * self.dti)
             BB = 2.0 * (self.x[i] + E - self.v[i] / r2) * math.exp(-self.dti/r2)
