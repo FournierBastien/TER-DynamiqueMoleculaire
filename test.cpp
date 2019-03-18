@@ -15,7 +15,7 @@ void ordonne(int ifirst, int ilast, vector < float > * x, vector < float > * v, 
   float xp, vp;
   //float mip, map;
 
-  for (int i = ifirst+1; i < ilast; i++) {
+  for (int i = ifirst+1; i <= ilast; i++) {
     int j = i;
     xp = ( * x)[i];
     vp = ( * v)[i];
@@ -45,21 +45,21 @@ void avance(int n, int m, int ifirst, int ilast, float dti, float * eav, float *
   float r2 = -sqrt(2.0), tier = 1.0 / 3.0;
   float AA, BB, E;
 
-  vector < float > a(m, 0.0);
+  vector < float > a(m);
 
   // calcul de l'accélération
   * eav = * epolar + 0.5 * n;
 
-  for (int i = ifirst; i < ilast; i++) {
+  for (int i = ifirst; i <= ilast; i++) {
     * eap = * eav - 1.0;
     a[i] = 0.5 * ( * eav + * eap);
     * eav = * eap;
   }
 
-  for (int i = ifirst; i < ilast; i++) {
+  for (int i = ifirst; i <= ilast; i++) {
     E = a[i];
     AA = (( * x)[i] + E + r2 * ( * v)[i]) * exp(r2 * dti);
-    BB = 2.0 * (( * x)[i] + E - ( * v)[i] / r2) * exp(-dti / r2);
+    BB = 2.0 * (( * x)[i] + E - ( * v)[i] / r2) * exp((-dti / r2));
 
     ( * x)[i] = ((AA + BB) * tier) - E;
     ( * v)[i] = (AA * r2 - BB / r2) * tier;
@@ -82,7 +82,7 @@ void wbande(ofstream * flux_fichier, int ifirst, int ilast, int tecr, int m, int
   * flux_fichier << "enregistrement a tecr=" << tecr;
   * flux_fichier << "#" << m << " " << n << " " << ifirst << " " << tecr;
 
-  for (int i = ifirst; i < ilast; i++) {
+  for (int i = ifirst; i <= ilast; i++) {
     * flux_fichier << ( * x)[i] << " " << ( * v)[i] << " " << ( * name)[i] << "\n";
   }
 
@@ -97,10 +97,10 @@ void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, float pv
   ( * x)[0] = -0.5 * n;
   ( * x)[m-1] = 0.5 * n;
 
-  for (int i = ifirst; i < ilast; i++) {
+  for (int i = ifirst; i <= ilast; i++) {
     ( * name)[i] = i - 1;
     ( * x)[i] = ( * x)[0] + 0.5 + i - ifirst;
-    ( * v)[i] = 2.0 * pvit * (0.5 - (rand() % 2));
+    ( * v)[i] = 2.0 * pvit * (0.5e0 - rand());
     ( * mi)[i] = 1.0;
     ( * ma)[i] = 1.0;
   }
@@ -109,16 +109,16 @@ void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, float pv
 
   float vmoy;
 
-  for (int i = ifirst; i < ilast; i++) {
+  for (int i = ifirst; i <= ilast; i++) {
     vmoy += ( * v)[i];
   }
   vmoy = vmoy / n;
 
-  for (int i = ifirst; i < ilast; i++) {
+  for (int i = ifirst; i <= ilast; i++) {
     ( * v)[i] -= vmoy;
   }
 
-  for (int i = ifirst; i < ilast; i++) {
+  for (int i = ifirst; i <= ilast; i++) {
     vmoy += ( * v)[i];
   }
   //for_each((*v)[ifirst],(*v)[ilast], [&](int n){vmoy += n;});
@@ -129,7 +129,7 @@ void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, float pv
 
 void run(string fichier, int n) {
   int m = n + 2;
-  int ifirst = 2;
+  int ifirst = 1;
   int ilast = n + 1;
   float dti = 0.001;
   float dtsor = 1.0;
@@ -139,11 +139,11 @@ void run(string fichier, int n) {
   float epolar = 0.0;
   float eav = 0.0;
   float eap = 0.0;
-  vector < float > * x = new vector < float > (m, 0.0);
-  vector < float > * v = new vector < float > (m, 0.0);
-  vector < float > * mi = new vector < float > (m, 0.0);
-  vector < float > * ma = new vector < float > (m, 0.0);
-  vector < int > * name = new vector < int > (m, 0);
+  vector < float > * x = new vector < float > (m);
+  vector < float > * v = new vector < float > (m);
+  vector < float > * mi = new vector < float > (m);
+  vector < float > * ma = new vector < float > (m);
+  vector < int > * name = new vector < int > (m);
   float tecr = 0.0;
   float tsor = 0.0;
 
@@ -160,14 +160,17 @@ void run(string fichier, int n) {
 
   wbande( & flux_fichier, ifirst, ilast, tecr, m, n, x, v, name);
 
+  tecr += dti;
+  tsor = tecr+dtsor;
+
   while (abs(tecr - tstop) > dtsor / 2.0) {
-    while (abs(tecr - tstop) > dti / 2.0) {
+    while (abs(tecr - tsor) > dti / 2.0) {
       avance(n, m, ifirst, ilast, dti, & eav, & eap, & epolar, x, v);
       ordonne(ifirst, ilast, x, v, name);
       tecr += dti;
-      cout << tecr << " " << abs(tecr - tstop) << " " << dti / 2.0 << endl;
+      //cout << tecr << " " << abs(tecr - tstop) << " " << dti / 2.0 << endl;
     }
-    cout << "Temps" << endl;
+    //cout << "Temps" << endl;
     wbande( & flux_fichier, ifirst, ilast, tecr, m, n, x, v, name);
     tsor += dtsor;
     
@@ -179,14 +182,20 @@ void run(string fichier, int n) {
 }
 
 int main() {
-  clock_t t = clock();
+
+  srand(1089);
+  clock_t start = clock();
   string fichier = "resultat_test_cpp.txt";
   int n = 10000;
 
   run(fichier, n);
 
-  t = clock() - t;
-  cout << "Temps écoulé : " << t << endl;
+
+  double duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
+  //t = clock() - t;
+  cout << "Temps écoulé : " << duration << " secondes"<< endl;
 
   return 0;
 }
+
+// Temps écoulé : 241.908 secondes soit 4 minutes
