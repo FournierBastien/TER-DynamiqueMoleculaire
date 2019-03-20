@@ -10,9 +10,9 @@
 
 using namespace std;
 
-void ordonne(int ifirst, int ilast, vector < float > * x, vector < float > * v, vector < int > * name) {
-  int np;
-  float xp, vp;
+inline void ordonne(int ifirst, int ilast, vector < float > * x, vector < float > * v, vector < int > * name) {
+  int np = 0;
+  float xp = 0.0, vp = 0.0;
   //float mip, map;
 
   for (int i = ifirst+1; i <= ilast; i++) {
@@ -40,24 +40,24 @@ void ordonne(int ifirst, int ilast, vector < float > * x, vector < float > * v, 
 
 }
 
-void avance(int n, int m, int ifirst, int ilast, float dti, float * eav, float * eap, float * epolar, vector < float > * x, vector < float > * v) {
+inline void avance(int n, int m, int ifirst, int ilast, float dti, float * eav, float * eap, float * epolar, vector < float > * x, vector < float > * v) {
 
   float r2 = -sqrt(2.0), tier = 1.0 / 3.0;
-  float AA, BB, E;
+  float AA = 0.0 , BB = 0.0 , E = 0.0;
 
-  vector < float > a(m);
+  vector < float > * a = new vector < float > (m);
 
   // calcul de l'accélération
   * eav = * epolar + 0.5 * n;
 
   for (int i = ifirst; i <= ilast; i++) {
     * eap = * eav - 1.0;
-    a[i] = 0.5 * ( * eav + * eap);
+    (*a)[i] = 0.5 * ( * eav + * eap);
     * eav = * eap;
   }
 
   for (int i = ifirst; i <= ilast; i++) {
-    E = a[i];
+    E = (*a)[i];
     AA = (( * x)[i] + E + r2 * ( * v)[i]) * exp(r2 * dti);
     BB = 2.0 * (( * x)[i] + E - ( * v)[i] / r2) * exp((-dti / r2));
 
@@ -76,9 +76,13 @@ void avance(int n, int m, int ifirst, int ilast, float dti, float * eav, float *
 
   }
 
+  // free
+  std::vector<float>().swap(*a);
+  //free(a);
+
 }
 
-void wbande(ofstream * flux_fichier, int ifirst, int ilast, int tecr, int m, int n, vector < float > * x, vector < float > * v, vector < int > * name) {
+inline void wbande(ofstream * flux_fichier, int ifirst, int ilast, int tecr, int m, int n, vector < float > * x, vector < float > * v, vector < int > * name) {
   * flux_fichier << "enregistrement a tecr=" << tecr;
   * flux_fichier << "#" << m << " " << n << " " << ifirst << " " << tecr;
 
@@ -89,7 +93,7 @@ void wbande(ofstream * flux_fichier, int ifirst, int ilast, int tecr, int m, int
    * flux_fichier << "\n" << endl;
 }
 
-void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, float pvit, vector < float > * x, vector < float > * v, vector < float > * mi, vector < float > * ma, vector < int > * name) {
+inline void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, float pvit, vector < float > * x, vector < float > * v, vector < float > * mi, vector < float > * ma, vector < int > * name) {
   
   /*( * x)[0] = 0.5 * n;
   ( * x)[1] += -0.5 * n;*/
@@ -107,7 +111,7 @@ void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, float pv
 
   // calage du barycentre a zero avec une vitesse moyenne nulle
 
-  float vmoy;
+  float vmoy = 0.0;
 
   for (int i = ifirst; i <= ilast; i++) {
     vmoy += ( * v)[i];
@@ -127,7 +131,7 @@ void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, float pv
 
 }
 
-void run(string fichier, int n) {
+inline void run(string fichier, int n) {
   int m = n + 2;
   int ifirst = 1;
   int ilast = n + 1;
@@ -179,6 +183,20 @@ void run(string fichier, int n) {
 
   flux_fichier << "\nFin du programme.\n";
   flux_fichier.close();
+
+  std::vector<float>().swap(*x);
+  std::vector<float>().swap(*v);
+  std::vector<float>().swap(*mi);
+  std::vector<float>().swap(*ma);
+  std::vector<int>().swap(*name);
+
+  /*free(x);
+  free(v);
+  free(mi);
+  free(ma);
+  free(name);*/
+
+
 }
 
 int main() {
@@ -194,8 +212,11 @@ int main() {
   double duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
   //t = clock() - t;
   cout << "Temps écoulé : " << duration << " secondes"<< endl;
-
+  
   return 0;
 }
 
+
+// valgrind --leak-check=full -v ./test
+// g++ -std=c++11 -Wall -Wextra -Werror test.cpp -o test
 // Temps écoulé : 241.908 secondes soit 4 minutes
