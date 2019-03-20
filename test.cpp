@@ -26,7 +26,7 @@ inline void ordonne(int ifirst, int ilast, vector < float > * x, vector < float 
     while (j != 1.0 && ( * x)[i] < ( * x)[j - 1]) {
       j = j - 1.0;
     }
-    //cout << "T" << endl;
+
     for (int k = i; k > j + 1; k--) {
       ( * x)[k] = ( * x)[k - 1];
       ( * v)[k] = ( * v)[k - 1];
@@ -91,7 +91,7 @@ inline void wbande(ofstream * flux_fichier, int ifirst, int ilast, int tecr, int
     * flux_fichier << fixed << setprecision(10) << ( * x)[i] << " " << ( * v)[i] << " " << ( * name)[i] << "\n";
   }
 
-   * flux_fichier << "\n" << endl;
+   * flux_fichier << "\n";
 }
 
 inline void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, float pvit, vector < float > * x, vector < float > * v, vector < float > * mi, vector < float > * ma, vector < int > * name) {
@@ -209,14 +209,11 @@ int main() {
 
   run(fichier, n);
 
-
   double duration = ( std::clock() - start ) / (double) CLOCKS_PER_SEC;
-  //t = clock() - t;
   cout << "Temps écoulé : " << duration << " secondes"<< endl;
   
   return 0;
 }
 
 // g++ -std=c++11 -Wall -Wextra -Werror test.cpp -o test
-// Temps écoulé : 241.908 secondes soit 4 minutes
-//                282.069
+// Temps écoulé : ~ 20.6339 secondes
