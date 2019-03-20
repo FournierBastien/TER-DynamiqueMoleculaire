@@ -1,4 +1,5 @@
 #include <iostream> 
+#include <iomanip>
 #include <fstream> 
 #include <string> 
 #include <cstdio> 
@@ -87,7 +88,7 @@ inline void wbande(ofstream * flux_fichier, int ifirst, int ilast, int tecr, int
   * flux_fichier << "#" << m << " " << n << " " << ifirst << " " << tecr;
 
   for (int i = ifirst; i <= ilast; i++) {
-    * flux_fichier << ( * x)[i] << " " << ( * v)[i] << " " << ( * name)[i] << "\n";
+    * flux_fichier << fixed << setprecision(10) << ( * x)[i] << " " << ( * v)[i] << " " << ( * name)[i] << "\n";
   }
 
    * flux_fichier << "\n" << endl;
@@ -154,7 +155,7 @@ inline void run(string fichier, int n) {
   ofstream flux_fichier;
   flux_fichier.open(fichier);
 
-  flux_fichier << "simulation : " << fichier;
+  flux_fichier << "simulation : " << fichier << " ";
   flux_fichier << dti << " : pas de temps";
   flux_fichier << " n = " << n << " pvit = " << pvit;
   flux_fichier << " tstop = " << tstop << " dtsor = " << dtsor;
@@ -201,7 +202,7 @@ inline void run(string fichier, int n) {
 
 int main() {
 
-  srand(1089);
+  srand(1);
   clock_t start = clock();
   string fichier = "resultat_test_cpp.txt";
   int n = 10000;
@@ -216,7 +217,6 @@ int main() {
   return 0;
 }
 
-
-// valgrind --leak-check=full -v ./test
 // g++ -std=c++11 -Wall -Wextra -Werror test.cpp -o test
 // Temps écoulé : 241.908 secondes soit 4 minutes
+//                282.069
