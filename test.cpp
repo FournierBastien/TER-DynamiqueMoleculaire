@@ -7,6 +7,7 @@
 #include <ctime>
 #include <cmath> 
 #include <vector>
+#include <random>
 #include<algorithm>
 
 using namespace std;
@@ -99,13 +100,17 @@ inline void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, f
   /*( * x)[0] = 0.5 * n;
   ( * x)[1] += -0.5 * n;*/
 
+  default_random_engine generator;
+  uniform_real_distribution<double> distribution(0.0,1.0);
+
   ( * x)[0] = -0.5 * n;
   ( * x)[m-1] = 0.5 * n;
 
   for (int i = ifirst; i <= ilast; i++) {
     ( * name)[i] = i - 1;
     ( * x)[i] = ( * x)[0] + 0.5 + i - ifirst;
-    ( * v)[i] = 2.0 * pvit * (0.5e0 - rand());
+    ( * v)[i] = 2.0 * pvit * (0.5e0 - distribution(generator));
+    //( * v)[i] = 2.0 * pvit * (0.5e0 - rand());
     ( * mi)[i] = 1.0;
     ( * ma)[i] = 1.0;
   }
@@ -200,6 +205,24 @@ inline void run(string fichier, int n) {
 
 }
 
+
+void generate(){
+
+  int n = 10000;
+
+  ofstream flux_fichier;
+  flux_fichier.open("random_values.txt");
+
+  default_random_engine generator;
+  uniform_real_distribution<double> distribution(0.0,1.0);
+
+  for( int i = 0; i < n; i++){
+    flux_fichier << distribution(generator) << "\n";
+  }
+
+  flux_fichier.close();
+}
+
 int main() {
 
   srand(1);
@@ -216,4 +239,4 @@ int main() {
 }
 
 // g++ -std=c++11 -Wall -Wextra -Werror test.cpp -o test
-// Temps écoulé : ~ 20.6339 secondes
+// Temps écoulé : ~ 30 secondes
