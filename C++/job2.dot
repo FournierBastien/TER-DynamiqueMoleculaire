@@ -1,0 +1,21 @@
+digraph {
+	graph [fontname=Arial, nodesep=0.125, ranksep=0.25];
+	node [fontcolor=white, fontname=Arial, height=0, shape=box, style=filled, width=0];
+	edge [fontname=Arial];
+	1 [color="#ff0000", fontcolor="#ffffff", fontsize="10.00", label="main\n100.00%\n(0.00%)"];
+	1 -> 2 [arrowsize="1.00", color="#fe0400", fontcolor="#fe0400", fontsize="10.00", label="99.66%\n1×", labeldistance="3.99", penwidth="3.99"];
+	2 [color="#fe0400", fontcolor="#ffffff", fontsize="10.00", label="run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int)\n99.66%\n(0.00%)\n1×"];
+	2 -> 3 [arrowsize="0.73", color="#23bb09", fontcolor="#23bb09", fontsize="10.00", label="53.63%\n14998×", labeldistance="2.15", penwidth="2.15"];
+	2 -> 4 [arrowsize="0.67", color="#0aaf29", fontcolor="#0aaf29", fontsize="10.00", label="45.36%\n14998×", labeldistance="1.81", penwidth="1.81"];
+	2 -> 8 [arrowsize="0.35", color="#0d1074", fontcolor="#0d1074", fontsize="10.00", label="0.67%\n16×", labeldistance="0.50", penwidth="0.50"];
+	3 [color="#23bb09", fontcolor="#ffffff", fontsize="10.00", label="triFusion(float*, float*, int*, int, int)\n53.63%\n(13.83%)\n300004994×"];
+	3 -> 3 [arrowsize="0.73", color="#23bb09", fontcolor="#23bb09", fontsize="10.00", label="299989996×", labeldistance="2.15", penwidth="2.15"];
+	3 -> 5 [arrowsize="0.63", color="#0ba84b", fontcolor="#0ba84b", fontsize="10.00", label="39.80%\n149994998×", labeldistance="1.59", penwidth="1.59"];
+	4 [color="#0aaf29", fontcolor="#ffffff", fontsize="10.00", label="avance(int, int, int, int, float, float*, float*, float*, float*, float*)\n45.36%\n(38.62%)\n14998×"];
+	4 -> 6 [arrowsize="0.35", color="#0d2b7b", fontcolor="#0d2b7b", fontsize="10.00", label="6.75%\n299989996×", labeldistance="0.50", penwidth="0.50"];
+	5 [color="#0ba84b", fontcolor="#ffffff", fontsize="10.00", label="fusion(float*, float*, int*, int, int, int)\n39.80%\n(39.80%)\n149994998×"];
+	6 [color="#0d2b7b", fontcolor="#ffffff", fontsize="10.00", label="std::exp(float)\n6.75%\n(6.75%)\n299989996×"];
+	7 [color="#0d1074", fontcolor="#ffffff", fontsize="10.00", label="std::setprecision(int)\n0.67%\n(0.67%)\n160016×"];
+	8 [color="#0d1074", fontcolor="#ffffff", fontsize="10.00", label="wbande(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, int, float*, float*, int*)\n0.67%\n(0.00%)\n16×"];
+	8 -> 7 [arrowsize="0.35", color="#0d1074", fontcolor="#0d1074", fontsize="10.00", label="0.67%\n160016×", labeldistance="0.50", penwidth="0.50"];
+}

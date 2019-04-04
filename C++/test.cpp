@@ -32,6 +32,7 @@ inline void fusion(float * x, float * v, int * name, int start, int mid, int end
           name[index] = name[index - 1];
           index--; 
       } 
+      
       x[start] = x2; 
       v[index] = v2 ;
       name[index] = n2;
@@ -234,8 +235,8 @@ inline void run(string fichier, int n) {
   while (abs(tecr - tstop) > dtsor / 2.0) {
     while (abs(tecr - tsor) > dti / 2.0) {
       avance(n, m, ifirst, ilast, dti, & eav, & eap, & epolar, x, v);
-      //triFusion(x,v,name,0,m-1);
-      ordonne(ifirst,ilast,x,v,name);
+      triFusion(x,v,name,0,m-1);
+      //ordonne(ifirst,ilast,x,v,name);
       tecr += dti;
     }
     wbande( & flux_fichier, ifirst, ilast, tecr, m, n, x, v, name);

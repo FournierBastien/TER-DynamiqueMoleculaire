@@ -1,0 +1,393 @@
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 38.80      2.35     2.35 149994998     0.00     0.00  fusion(float*, float*, int*, int, int, int)
+ 38.63      4.69     2.34    14998     0.00     0.00  avance(int, int, int, int, float, float*, float*, float*, float*, float*)
+ 14.69      5.58     0.89    14998     0.00     0.00  triFusion(float*, float*, int*, int, int)
+  7.26      6.02     0.44 299989996     0.00     0.00  std::exp(float)
+  0.50      6.05     0.03   160016     0.00     0.00  std::setprecision(int)
+  0.17      6.06     0.01   160016     0.00     0.00  std::ios_base::setf(std::_Ios_Fmtflags, std::_Ios_Fmtflags)
+  0.00      6.06     0.00   320032     0.00     0.00  std::operator&(std::_Ios_Fmtflags, std::_Ios_Fmtflags)
+  0.00      6.06     0.00   160016     0.00     0.00  std::operator&=(std::_Ios_Fmtflags&, std::_Ios_Fmtflags)
+  0.00      6.06     0.00   160016     0.00     0.00  std::operator~(std::_Ios_Fmtflags)
+  0.00      6.06     0.00   160016     0.00     0.00  std::operator|=(std::_Ios_Fmtflags&, std::_Ios_Fmtflags)
+  0.00      6.06     0.00   160016     0.00     0.00  std::operator|(std::_Ios_Fmtflags, std::_Ios_Fmtflags)
+  0.00      6.06     0.00    20002     0.00     0.00  std::uniform_real_distribution<float>::param_type::a() const
+  0.00      6.06     0.00    15029     0.00     0.00  std::abs(float)
+  0.00      6.06     0.00    10001     0.00     0.00  std::uniform_real_distribution<float>::param_type::b() const
+  0.00      6.06     0.00    10001     0.00     0.00  float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&)
+  0.00      6.06     0.00    10001     0.00     0.00  float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&)
+  0.00      6.06     0.00    10001     0.00     0.00  std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::min()
+  0.00      6.06     0.00    10001     0.00     0.00  std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::operator()()
+  0.00      6.06     0.00    10001     0.00     0.00  std::__detail::_Mod<unsigned long, 2147483647ul, 16807ul, 0ul, true, true>::__calc(unsigned long)
+  0.00      6.06     0.00    10001     0.00     0.00  unsigned long std::__detail::__mod<unsigned long, 2147483647ul, 16807ul, 0ul>(unsigned long)
+  0.00      6.06     0.00    10001     0.00     0.00  std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::_Adaptor(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&)
+  0.00      6.06     0.00    10001     0.00     0.00  std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()()
+  0.00      6.06     0.00    10001     0.00     0.00  float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&)
+  0.00      6.06     0.00    10001     0.00     0.00  unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&)
+  0.00      6.06     0.00    10001     0.00     0.00  unsigned long const& std::min<unsigned long>(unsigned long const&, unsigned long const&)
+  0.00      6.06     0.00       16     0.00     0.00  wbande(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, int, float*, float*, int*)
+  0.00      6.06     0.00        3     0.00     0.00  std::chrono::duration<long, std::ratio<1l, 1000000000l> >::count() const
+  0.00      6.06     0.00        3     0.00     0.00  std::__detail::_Mod<unsigned long, 2147483647ul, 1ul, 0ul, true, true>::__calc(unsigned long)
+  0.00      6.06     0.00        3     0.00     0.00  unsigned long std::__detail::__mod<unsigned long, 2147483647ul, 1ul, 0ul>(unsigned long)
+  0.00      6.06     0.00        2     0.00     0.00  std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::time_since_epoch() const
+  0.00      6.06     0.00        1     0.00     0.00  _GLOBAL__sub_I_main
+  0.00      6.06     0.00        1     0.00     6.05  run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int)
+  0.00      6.06     0.00        1     0.00     0.00  __static_initialization_and_destruction_0(int, int)
+  0.00      6.06     0.00        1     0.00     0.00  init(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, float, float*, float*, float*, float*, int*)
+  0.00      6.06     0.00        1     0.00     0.00  std::chrono::duration<long, std::ratio<1l, 1l> >::count() const
+  0.00      6.06     0.00        1     0.00     0.00  std::uniform_real_distribution<float>::param_type::param_type(float, float)
+  0.00      6.06     0.00        1     0.00     0.00  std::uniform_real_distribution<float>::uniform_real_distribution(float, float)
+  0.00      6.06     0.00        1     0.00     0.00  std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::seed(unsigned long)
+  0.00      6.06     0.00        1     0.00     0.00  std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::linear_congruential_engine(unsigned long)
+  0.00      6.06     0.00        1     0.00     0.00  std::enable_if<std::chrono::__is_duration<std::chrono::duration<long, std::ratio<1l, 1l> > >::value, std::chrono::duration<long, std::ratio<1l, 1l> > >::type std::chrono::duration_cast<std::chrono::duration<long, std::ratio<1l, 1l> >, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&)
+  0.00      6.06     0.00        1     0.00     0.00  std::chrono::duration<long, std::ratio<1l, 1l> > std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1l> >, std::ratio<1l, 1000000000l>, long, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&)
+  0.00      6.06     0.00        1     0.00     0.00  std::chrono::duration<long, std::ratio<1l, 1000000000l> >::duration<long, void>(long const&)
+  0.00      6.06     0.00        1     0.00     0.00  std::chrono::duration<long, std::ratio<1l, 1l> >::duration<long, void>(long const&)
+  0.00      6.06     0.00        1     0.00     0.00  std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&)
+  0.00      6.06     0.00        1     0.00     0.00  std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&)
+  0.00      6.06     0.00        1     0.00     0.00  std::operator|(std::_Ios_Openmode, std::_Ios_Openmode)
+
+ %         the percentage of the total running time of the
+time       program used by this function.
+
+cumulative a running sum of the number of seconds accounted
+ seconds   for by this function and those listed above it.
+
+ self      the number of seconds accounted for by this
+seconds    function alone.  This is the major sort for this
+           listing.
+
+calls      the number of times this function was invoked, if
+           this function is profiled, else blank.
+
+ self      the average number of milliseconds spent in this
+ms/call    function per call, if this function is profiled,
+	   else blank.
+
+ total     the average number of milliseconds spent in this
+ms/call    function and its descendents per call, if this
+	   function is profiled, else blank.
+
+name       the name of the function.  This is the minor sort
+           for this listing. The index shows the location of
+	   the function in the gprof listing. If the index is
+	   in parenthesis it shows where it would appear in
+	   the gprof listing if it were to be printed.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+		     Call graph (explanation follows)
+
+
+granularity: each sample hit covers 2 byte(s) for 0.16% of 6.06 seconds
+
+index % time    self  children    called     name
+                                                 <spontaneous>
+[1]     99.8    0.00    6.05                 main [1]
+                0.00    6.05       1/1           run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [2]
+                0.00    0.00       1/1           std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&) [52]
+                0.00    0.00       1/1           std::enable_if<std::chrono::__is_duration<std::chrono::duration<long, std::ratio<1l, 1l> > >::value, std::chrono::duration<long, std::ratio<1l, 1l> > >::type std::chrono::duration_cast<std::chrono::duration<long, std::ratio<1l, 1l> >, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [48]
+                0.00    0.00       1/1           std::chrono::duration<long, std::ratio<1l, 1l> >::count() const [43]
+-----------------------------------------------
+                0.00    6.05       1/1           main [1]
+[2]     99.8    0.00    6.05       1         run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [2]
+                0.89    2.35   14998/14998       triFusion(float*, float*, int*, int, int) [3]
+                2.34    0.44   14998/14998       avance(int, int, int, int, float, float*, float*, float*, float*, float*) [4]
+                0.00    0.03      16/16          wbande(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, int, float*, float*, int*) [8]
+                0.00    0.00   15029/15029       std::abs(float) [23]
+                0.00    0.00       1/1           std::operator|(std::_Ios_Openmode, std::_Ios_Openmode) [54]
+                0.00    0.00       1/1           init(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, float, float*, float*, float*, float*, int*) [42]
+-----------------------------------------------
+                             299989996             triFusion(float*, float*, int*, int, int) [3]
+                0.89    2.35   14998/14998       run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [2]
+[3]     53.5    0.89    2.35   14998+299989996 triFusion(float*, float*, int*, int, int) [3]
+                2.35    0.00 149994998/149994998     fusion(float*, float*, int*, int, int, int) [5]
+                             299989996             triFusion(float*, float*, int*, int, int) [3]
+-----------------------------------------------
+                2.34    0.44   14998/14998       run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [2]
+[4]     45.9    2.34    0.44   14998         avance(int, int, int, int, float, float*, float*, float*, float*, float*) [4]
+                0.44    0.00 299989996/299989996     std::exp(float) [6]
+-----------------------------------------------
+                2.35    0.00 149994998/149994998     triFusion(float*, float*, int*, int, int) [3]
+[5]     38.8    2.35    0.00 149994998         fusion(float*, float*, int*, int, int, int) [5]
+-----------------------------------------------
+                0.44    0.00 299989996/299989996     avance(int, int, int, int, float, float*, float*, float*, float*, float*) [4]
+[6]      7.3    0.44    0.00 299989996         std::exp(float) [6]
+-----------------------------------------------
+                0.03    0.00  160016/160016      wbande(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, int, float*, float*, int*) [8]
+[7]      0.5    0.03    0.00  160016         std::setprecision(int) [7]
+-----------------------------------------------
+                0.00    0.03      16/16          run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [2]
+[8]      0.5    0.00    0.03      16         wbande(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, int, float*, float*, int*) [8]
+                0.03    0.00  160016/160016      std::setprecision(int) [7]
+-----------------------------------------------
+                0.01    0.00  160016/160016      std::fixed(std::ios_base&) [10]
+[9]      0.2    0.01    0.00  160016         std::ios_base::setf(std::_Ios_Fmtflags, std::_Ios_Fmtflags) [9]
+                0.00    0.00  160016/160016      std::operator~(std::_Ios_Fmtflags) [19]
+                0.00    0.00  160016/160016      std::operator&=(std::_Ios_Fmtflags&, std::_Ios_Fmtflags) [18]
+                0.00    0.00  160016/320032      std::operator&(std::_Ios_Fmtflags, std::_Ios_Fmtflags) [17]
+                0.00    0.00  160016/160016      std::operator|=(std::_Ios_Fmtflags&, std::_Ios_Fmtflags) [20]
+-----------------------------------------------
+                                                 <spontaneous>
+[10]     0.2    0.00    0.01                 std::fixed(std::ios_base&) [10]
+                0.01    0.00  160016/160016      std::ios_base::setf(std::_Ios_Fmtflags, std::_Ios_Fmtflags) [9]
+-----------------------------------------------
+                0.00    0.00  160016/320032      std::operator&=(std::_Ios_Fmtflags&, std::_Ios_Fmtflags) [18]
+                0.00    0.00  160016/320032      std::ios_base::setf(std::_Ios_Fmtflags, std::_Ios_Fmtflags) [9]
+[17]     0.0    0.00    0.00  320032         std::operator&(std::_Ios_Fmtflags, std::_Ios_Fmtflags) [17]
+-----------------------------------------------
+                0.00    0.00  160016/160016      std::ios_base::setf(std::_Ios_Fmtflags, std::_Ios_Fmtflags) [9]
+[18]     0.0    0.00    0.00  160016         std::operator&=(std::_Ios_Fmtflags&, std::_Ios_Fmtflags) [18]
+                0.00    0.00  160016/320032      std::operator&(std::_Ios_Fmtflags, std::_Ios_Fmtflags) [17]
+-----------------------------------------------
+                0.00    0.00  160016/160016      std::ios_base::setf(std::_Ios_Fmtflags, std::_Ios_Fmtflags) [9]
+[19]     0.0    0.00    0.00  160016         std::operator~(std::_Ios_Fmtflags) [19]
+-----------------------------------------------
+                0.00    0.00  160016/160016      std::ios_base::setf(std::_Ios_Fmtflags, std::_Ios_Fmtflags) [9]
+[20]     0.0    0.00    0.00  160016         std::operator|=(std::_Ios_Fmtflags&, std::_Ios_Fmtflags) [20]
+                0.00    0.00  160016/160016      std::operator|(std::_Ios_Fmtflags, std::_Ios_Fmtflags) [21]
+-----------------------------------------------
+                0.00    0.00  160016/160016      std::operator|=(std::_Ios_Fmtflags&, std::_Ios_Fmtflags) [20]
+[21]     0.0    0.00    0.00  160016         std::operator|(std::_Ios_Fmtflags, std::_Ios_Fmtflags) [21]
+-----------------------------------------------
+                0.00    0.00   20002/20002       float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&) [26]
+[22]     0.0    0.00    0.00   20002         std::uniform_real_distribution<float>::param_type::a() const [22]
+-----------------------------------------------
+                0.00    0.00   15029/15029       run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [2]
+[23]     0.0    0.00    0.00   15029         std::abs(float) [23]
+-----------------------------------------------
+                0.00    0.00   10001/10001       float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&) [26]
+[24]     0.0    0.00    0.00   10001         std::uniform_real_distribution<float>::param_type::b() const [24]
+-----------------------------------------------
+                0.00    0.00   10001/10001       init(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, float, float*, float*, float*, float*, int*) [42]
+[25]     0.0    0.00    0.00   10001         float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&) [25]
+                0.00    0.00   10001/10001       float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&) [26]
+-----------------------------------------------
+                0.00    0.00   10001/10001       float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&) [25]
+[26]     0.0    0.00    0.00   10001         float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&) [26]
+                0.00    0.00   20002/20002       std::uniform_real_distribution<float>::param_type::a() const [22]
+                0.00    0.00   10001/10001       std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()() [32]
+                0.00    0.00   10001/10001       std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::_Adaptor(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&) [31]
+                0.00    0.00   10001/10001       std::uniform_real_distribution<float>::param_type::b() const [24]
+-----------------------------------------------
+                0.00    0.00   10001/10001       float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&) [33]
+[27]     0.0    0.00    0.00   10001         std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::min() [27]
+-----------------------------------------------
+                0.00    0.00   10001/10001       float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&) [33]
+[28]     0.0    0.00    0.00   10001         std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::operator()() [28]
+                0.00    0.00   10001/10001       unsigned long std::__detail::__mod<unsigned long, 2147483647ul, 16807ul, 0ul>(unsigned long) [30]
+-----------------------------------------------
+                0.00    0.00   10001/10001       unsigned long std::__detail::__mod<unsigned long, 2147483647ul, 16807ul, 0ul>(unsigned long) [30]
+[29]     0.0    0.00    0.00   10001         std::__detail::_Mod<unsigned long, 2147483647ul, 16807ul, 0ul, true, true>::__calc(unsigned long) [29]
+-----------------------------------------------
+                0.00    0.00   10001/10001       std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::operator()() [28]
+[30]     0.0    0.00    0.00   10001         unsigned long std::__detail::__mod<unsigned long, 2147483647ul, 16807ul, 0ul>(unsigned long) [30]
+                0.00    0.00   10001/10001       std::__detail::_Mod<unsigned long, 2147483647ul, 16807ul, 0ul, true, true>::__calc(unsigned long) [29]
+-----------------------------------------------
+                0.00    0.00   10001/10001       float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&) [26]
+[31]     0.0    0.00    0.00   10001         std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::_Adaptor(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&) [31]
+-----------------------------------------------
+                0.00    0.00   10001/10001       float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&) [26]
+[32]     0.0    0.00    0.00   10001         std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()() [32]
+                0.00    0.00   10001/10001       float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&) [33]
+-----------------------------------------------
+                0.00    0.00   10001/10001       std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()() [32]
+[33]     0.0    0.00    0.00   10001         float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&) [33]
+                0.00    0.00   10001/10001       unsigned long const& std::min<unsigned long>(unsigned long const&, unsigned long const&) [35]
+                0.00    0.00   10001/10001       unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&) [34]
+                0.00    0.00   10001/10001       std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::operator()() [28]
+                0.00    0.00   10001/10001       std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::min() [27]
+-----------------------------------------------
+                0.00    0.00   10001/10001       float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&) [33]
+[34]     0.0    0.00    0.00   10001         unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&) [34]
+-----------------------------------------------
+                0.00    0.00   10001/10001       float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&) [33]
+[35]     0.0    0.00    0.00   10001         unsigned long const& std::min<unsigned long>(unsigned long const&, unsigned long const&) [35]
+-----------------------------------------------
+                0.00    0.00       1/3           std::chrono::duration<long, std::ratio<1l, 1l> > std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1l> >, std::ratio<1l, 1000000000l>, long, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [49]
+                0.00    0.00       2/3           std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [53]
+[36]     0.0    0.00    0.00       3         std::chrono::duration<long, std::ratio<1l, 1000000000l> >::count() const [36]
+-----------------------------------------------
+                0.00    0.00       3/3           unsigned long std::__detail::__mod<unsigned long, 2147483647ul, 1ul, 0ul>(unsigned long) [38]
+[37]     0.0    0.00    0.00       3         std::__detail::_Mod<unsigned long, 2147483647ul, 1ul, 0ul, true, true>::__calc(unsigned long) [37]
+-----------------------------------------------
+                0.00    0.00       3/3           std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::seed(unsigned long) [46]
+[38]     0.0    0.00    0.00       3         unsigned long std::__detail::__mod<unsigned long, 2147483647ul, 1ul, 0ul>(unsigned long) [38]
+                0.00    0.00       3/3           std::__detail::_Mod<unsigned long, 2147483647ul, 1ul, 0ul, true, true>::__calc(unsigned long) [37]
+-----------------------------------------------
+                0.00    0.00       2/2           std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&) [52]
+[39]     0.0    0.00    0.00       2         std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::time_since_epoch() const [39]
+-----------------------------------------------
+                0.00    0.00       1/1           __libc_csu_init [61]
+[40]     0.0    0.00    0.00       1         _GLOBAL__sub_I_main [40]
+                0.00    0.00       1/1           __static_initialization_and_destruction_0(int, int) [41]
+-----------------------------------------------
+                0.00    0.00       1/1           _GLOBAL__sub_I_main [40]
+[41]     0.0    0.00    0.00       1         __static_initialization_and_destruction_0(int, int) [41]
+-----------------------------------------------
+                0.00    0.00       1/1           run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [2]
+[42]     0.0    0.00    0.00       1         init(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, float, float*, float*, float*, float*, int*) [42]
+                0.00    0.00   10001/10001       float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&) [25]
+                0.00    0.00       1/1           std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::linear_congruential_engine(unsigned long) [47]
+                0.00    0.00       1/1           std::uniform_real_distribution<float>::uniform_real_distribution(float, float) [45]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[43]     0.0    0.00    0.00       1         std::chrono::duration<long, std::ratio<1l, 1l> >::count() const [43]
+-----------------------------------------------
+                0.00    0.00       1/1           std::uniform_real_distribution<float>::uniform_real_distribution(float, float) [45]
+[44]     0.0    0.00    0.00       1         std::uniform_real_distribution<float>::param_type::param_type(float, float) [44]
+-----------------------------------------------
+                0.00    0.00       1/1           init(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, float, float*, float*, float*, float*, int*) [42]
+[45]     0.0    0.00    0.00       1         std::uniform_real_distribution<float>::uniform_real_distribution(float, float) [45]
+                0.00    0.00       1/1           std::uniform_real_distribution<float>::param_type::param_type(float, float) [44]
+-----------------------------------------------
+                0.00    0.00       1/1           std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::linear_congruential_engine(unsigned long) [47]
+[46]     0.0    0.00    0.00       1         std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::seed(unsigned long) [46]
+                0.00    0.00       3/3           unsigned long std::__detail::__mod<unsigned long, 2147483647ul, 1ul, 0ul>(unsigned long) [38]
+-----------------------------------------------
+                0.00    0.00       1/1           init(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, float, float*, float*, float*, float*, int*) [42]
+[47]     0.0    0.00    0.00       1         std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::linear_congruential_engine(unsigned long) [47]
+                0.00    0.00       1/1           std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::seed(unsigned long) [46]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[48]     0.0    0.00    0.00       1         std::enable_if<std::chrono::__is_duration<std::chrono::duration<long, std::ratio<1l, 1l> > >::value, std::chrono::duration<long, std::ratio<1l, 1l> > >::type std::chrono::duration_cast<std::chrono::duration<long, std::ratio<1l, 1l> >, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [48]
+                0.00    0.00       1/1           std::chrono::duration<long, std::ratio<1l, 1l> > std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1l> >, std::ratio<1l, 1000000000l>, long, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [49]
+-----------------------------------------------
+                0.00    0.00       1/1           std::enable_if<std::chrono::__is_duration<std::chrono::duration<long, std::ratio<1l, 1l> > >::value, std::chrono::duration<long, std::ratio<1l, 1l> > >::type std::chrono::duration_cast<std::chrono::duration<long, std::ratio<1l, 1l> >, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [48]
+[49]     0.0    0.00    0.00       1         std::chrono::duration<long, std::ratio<1l, 1l> > std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1l> >, std::ratio<1l, 1000000000l>, long, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [49]
+                0.00    0.00       1/3           std::chrono::duration<long, std::ratio<1l, 1000000000l> >::count() const [36]
+                0.00    0.00       1/1           std::chrono::duration<long, std::ratio<1l, 1l> >::duration<long, void>(long const&) [51]
+-----------------------------------------------
+                0.00    0.00       1/1           std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [53]
+[50]     0.0    0.00    0.00       1         std::chrono::duration<long, std::ratio<1l, 1000000000l> >::duration<long, void>(long const&) [50]
+-----------------------------------------------
+                0.00    0.00       1/1           std::chrono::duration<long, std::ratio<1l, 1l> > std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1l> >, std::ratio<1l, 1000000000l>, long, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [49]
+[51]     0.0    0.00    0.00       1         std::chrono::duration<long, std::ratio<1l, 1l> >::duration<long, void>(long const&) [51]
+-----------------------------------------------
+                0.00    0.00       1/1           main [1]
+[52]     0.0    0.00    0.00       1         std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&) [52]
+                0.00    0.00       2/2           std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::time_since_epoch() const [39]
+                0.00    0.00       1/1           std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [53]
+-----------------------------------------------
+                0.00    0.00       1/1           std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&) [52]
+[53]     0.0    0.00    0.00       1         std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [53]
+                0.00    0.00       2/3           std::chrono::duration<long, std::ratio<1l, 1000000000l> >::count() const [36]
+                0.00    0.00       1/1           std::chrono::duration<long, std::ratio<1l, 1000000000l> >::duration<long, void>(long const&) [50]
+-----------------------------------------------
+                0.00    0.00       1/1           run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [2]
+[54]     0.0    0.00    0.00       1         std::operator|(std::_Ios_Openmode, std::_Ios_Openmode) [54]
+-----------------------------------------------
+
+ This table describes the call tree of the program, and was sorted by
+ the total amount of time spent in each function and its children.
+
+ Each entry in this table consists of several lines.  The line with the
+ index number at the left hand margin lists the current function.
+ The lines above it list the functions that called this function,
+ and the lines below it list the functions this one called.
+ This line lists:
+     index	A unique number given to each element of the table.
+		Index numbers are sorted numerically.
+		The index number is printed next to every function name so
+		it is easier to look up where the function is in the table.
+
+     % time	This is the percentage of the `total' time that was spent
+		in this function and its children.  Note that due to
+		different viewpoints, functions excluded by options, etc,
+		these numbers will NOT add up to 100%.
+
+     self	This is the total amount of time spent in this function.
+
+     children	This is the total amount of time propagated into this
+		function by its children.
+
+     called	This is the number of times the function was called.
+		If the function called itself recursively, the number
+		only includes non-recursive calls, and is followed by
+		a `+' and the number of recursive calls.
+
+     name	The name of the current function.  The index number is
+		printed after it.  If the function is a member of a
+		cycle, the cycle number is printed between the
+		function's name and the index number.
+
+
+ For the function's parents, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the function into this parent.
+
+     children	This is the amount of time that was propagated from
+		the function's children into this parent.
+
+     called	This is the number of times this parent called the
+		function `/' the total number of times the function
+		was called.  Recursive calls to the function are not
+		included in the number after the `/'.
+
+     name	This is the name of the parent.  The parent's index
+		number is printed after it.  If the parent is a
+		member of a cycle, the cycle number is printed between
+		the name and the index number.
+
+ If the parents of the function cannot be determined, the word
+ `<spontaneous>' is printed in the `name' field, and all the other
+ fields are blank.
+
+ For the function's children, the fields have the following meanings:
+
+     self	This is the amount of time that was propagated directly
+		from the child into the function.
+
+     children	This is the amount of time that was propagated from the
+		child's children to the function.
+
+     called	This is the number of times the function called
+		this child `/' the total number of times the child
+		was called.  Recursive calls by the child are not
+		listed in the number after the `/'.
+
+     name	This is the name of the child.  The child's index
+		number is printed after it.  If the child is a
+		member of a cycle, the cycle number is printed
+		between the name and the index number.
+
+ If there are any cycles (circles) in the call graph, there is an
+ entry for the cycle-as-a-whole.  This entry shows who called the
+ cycle (as parents) and the members of the cycle (as children.)
+ The `+' recursive calls entry shows the number of function calls that
+ were internal to the cycle, and the calls entry for each member shows,
+ for that member, how many times it was called from other members of
+ the cycle.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+Copying and distribution of this file, with or without modification,
+are permitted in any medium without royalty provided the copyright
+notice and this notice are preserved.
+
+Index by function name
+
+  [40] _GLOBAL__sub_I_main    [26] float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&, std::uniform_real_distribution<float>::param_type const&) [32] std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::operator()()
+   [2] run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int) [27] std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::min() [9] std::ios_base::setf(std::_Ios_Fmtflags, std::_Ios_Fmtflags)
+  [41] __static_initialization_and_destruction_0(int, int) [46] std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::seed(unsigned long) [7] std::setprecision(int)
+  [42] init(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, float, float*, float*, float*, float*, int*) [47] std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::linear_congruential_engine(unsigned long) [33] float std::generate_canonical<float, 24ul, std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&)
+   [4] avance(int, int, int, int, float, float*, float*, float*, float*, float*) [28] std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>::operator()() [23] std::abs(float)
+   [5] fusion(float*, float*, int*, int, int, int) [48] std::enable_if<std::chrono::__is_duration<std::chrono::duration<long, std::ratio<1l, 1l> > >::value, std::chrono::duration<long, std::ratio<1l, 1l> > >::type std::chrono::duration_cast<std::chrono::duration<long, std::ratio<1l, 1l> >, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [6] std::exp(float)
+   [8] wbande(std::basic_ofstream<char, std::char_traits<char> >*, int, int, int, int, int, float*, float*, int*) [49] std::chrono::duration<long, std::ratio<1l, 1l> > std::chrono::__duration_cast_impl<std::chrono::duration<long, std::ratio<1l, 1l> >, std::ratio<1l, 1000000000l>, long, true, false>::__cast<long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [34] unsigned long const& std::max<unsigned long>(unsigned long const&, unsigned long const&)
+   [3] triFusion(float*, float*, int*, int, int) [50] std::chrono::duration<long, std::ratio<1l, 1000000000l> >::duration<long, void>(long const&) [35] unsigned long const& std::min<unsigned long>(unsigned long const&, unsigned long const&)
+  [22] std::uniform_real_distribution<float>::param_type::a() const [51] std::chrono::duration<long, std::ratio<1l, 1l> >::duration<long, void>(long const&) [18] std::operator&=(std::_Ios_Fmtflags&, std::_Ios_Fmtflags)
+  [24] std::uniform_real_distribution<float>::param_type::b() const [52] std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >(std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&, std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > > const&) [17] std::operator&(std::_Ios_Fmtflags, std::_Ios_Fmtflags)
+  [39] std::chrono::time_point<std::chrono::_V2::system_clock, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::time_since_epoch() const [53] std::common_type<std::chrono::duration<long, std::ratio<1l, 1000000000l> >, std::chrono::duration<long, std::ratio<1l, 1000000000l> > >::type std::chrono::operator-<long, std::ratio<1l, 1000000000l>, long, std::ratio<1l, 1000000000l> >(std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&, std::chrono::duration<long, std::ratio<1l, 1000000000l> > const&) [19] std::operator~(std::_Ios_Fmtflags)
+  [36] std::chrono::duration<long, std::ratio<1l, 1000000000l> >::count() const [29] std::__detail::_Mod<unsigned long, 2147483647ul, 16807ul, 0ul, true, true>::__calc(unsigned long) [20] std::operator|=(std::_Ios_Fmtflags&, std::_Ios_Fmtflags)
+  [43] std::chrono::duration<long, std::ratio<1l, 1l> >::count() const [37] std::__detail::_Mod<unsigned long, 2147483647ul, 1ul, 0ul, true, true>::__calc(unsigned long) [21] std::operator|(std::_Ios_Fmtflags, std::_Ios_Fmtflags)
+  [44] std::uniform_real_distribution<float>::param_type::param_type(float, float) [30] unsigned long std::__detail::__mod<unsigned long, 2147483647ul, 16807ul, 0ul>(unsigned long) [54] std::operator|(std::_Ios_Openmode, std::_Ios_Openmode)
+  [45] std::uniform_real_distribution<float>::uniform_real_distribution(float, float) [38] unsigned long std::__detail::__mod<unsigned long, 2147483647ul, 1ul, 0ul>(unsigned long)
+  [25] float std::uniform_real_distribution<float>::operator()<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul> >(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&) [31] std::__detail::_Adaptor<std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>, float>::_Adaptor(std::linear_congruential_engine<unsigned long, 16807ul, 0ul, 2147483647ul>&)

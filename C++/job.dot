@@ -1,0 +1,14 @@
+digraph {
+	graph [fontname=Arial, nodesep=0.125, ranksep=0.25];
+	node [fontcolor=white, fontname=Arial, height=0, shape=box, style=filled, width=0];
+	edge [fontname=Arial];
+	1 [color="#ff0000", fontcolor="#ffffff", fontsize="10.00", label="main\n100.00%\n(0.00%)"];
+	1 -> 2 [arrowsize="1.00", color="#ff0000", fontcolor="#ff0000", fontsize="10.00", label="100.00%\n1×", labeldistance="4.00", penwidth="4.00"];
+	2 [color="#ff0000", fontcolor="#ffffff", fontsize="10.00", label="run(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, int)\n100.00%\n(0.00%)\n1×"];
+	2 -> 3 [arrowsize="0.88", color="#ddc705", fontcolor="#ddc705", fontsize="10.00", label="77.53%\n14998×", labeldistance="3.10", penwidth="3.10"];
+	2 -> 4 [arrowsize="0.47", color="#0c8290", fontcolor="#0c8290", fontsize="10.00", label="22.39%\n14998×", labeldistance="0.90", penwidth="0.90"];
+	3 [color="#ddc705", fontcolor="#ffffff", fontsize="10.00", label="ordonne(int, int, float*, float*, int*)\n77.53%\n(77.53%)\n14998×"];
+	4 [color="#0c8290", fontcolor="#ffffff", fontsize="10.00", label="avance(int, int, int, int, float, float*, float*, float*, float*, float*)\n22.39%\n(18.65%)\n14998×"];
+	4 -> 5 [arrowsize="0.35", color="#0d1d78", fontcolor="#0d1d78", fontsize="10.00", label="3.75%\n299989996×", labeldistance="0.50", penwidth="0.50"];
+	5 [color="#0d1d78", fontcolor="#ffffff", fontsize="10.00", label="std::exp(float)\n3.75%\n(3.75%)\n299989996×"];
+}
