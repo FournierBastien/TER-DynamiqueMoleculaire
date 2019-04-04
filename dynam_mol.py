@@ -61,15 +61,15 @@ class Univexp :
         # initialisation des "particules-mur"
 
         self.x[0] =  - 0.5*self.n
-	self.v[0] = 0
+        self.v[0] = 0
         self.mi[0] = 0
         self.ma[0] = 0
-	self.name[0] = 0
+        self.name[0] = 0
         self.x[self.m-1] = 0.5*self.n
-	self.v[self.m-1] = 0
+        self.v[self.m-1] = 0
         self.mi[self.m-1] = 0
         self.ma[self.m-1] = 0
-	self.name[self.m-1] = 0
+        self.name[self.m-1] = 0
 
         # initialisation des particules
         random.seed(100)
@@ -79,8 +79,7 @@ class Univexp :
             self.v[i] = 2. * self.pvit * (0.5 - random.random())
             self.mi[i] = 1.
             self.ma[i] = 1.
-            
-	self.epolar=0.
+        self.epolar=0.
         # calage du barycentre à zero avec une vitesse moyenne nulle
 
         vmoy = sum(self.v[self.ifirst:self.ilast]) 
@@ -88,7 +87,7 @@ class Univexp :
 
         self.v[self.ifirst:self.ilast]=[val - vmoy for val in self.v[self.ifirst:self.ilast]]
         vmoy = sum(self.v[self.ifirst:self.ilast])
-	print("vmoyen={:7.3f}".format(vmoy))
+        print("vmoyen={:7.3f}".format(vmoy))
 
 
     def avance(self):
@@ -130,8 +129,8 @@ class Univexp :
   
     def ordonne(self) :
         j=i=k=np=0
-	xp=0.
-	vp=0.
+        xp=0.
+        vp=0.
         for i in range(self.ifirst+1,self.ilast) :
             j=i
             xp = self.x[i]

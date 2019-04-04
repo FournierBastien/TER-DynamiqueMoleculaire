@@ -156,6 +156,7 @@ class Univexp():
         self.ma[self.m-1] = 0
         self.name[self.m-1] = 0
 
+    
         # initialisation des particules 99.998474121093750 
         for i in range(self.ifirst, self.ilast):
             self.name[i] = i-1
