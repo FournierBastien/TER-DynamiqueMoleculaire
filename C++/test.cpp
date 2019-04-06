@@ -9,6 +9,7 @@
 #include <chrono>
 #include <random>
 #include<algorithm>
+// #include <mpi.h>
 
 using namespace std; 
 
@@ -49,6 +50,12 @@ inline void fusion(float * x, float * v, int * name, int start, int mid, int end
 inline void triFusion(float * x, float * v, int * name, int start, int end) 
 { 
 
+  MPI_Status status;
+
+	MPI_Init(&argc,&argv);
+	MPI_Comm_rank(MPI_COMM_WORLD,&id);
+	MPI_Comm_size(MPI_COMM_WORLD,&p);
+
   // si le tableau est supérieur à un élément
   if (start < end) { 
 
@@ -64,6 +71,8 @@ inline void triFusion(float * x, float * v, int * name, int start, int end)
     // on fusionne les deux parties
     fusion(x,v,name, start, m, end); 
   } 
+
+  MPI_Finalize();
 } 
 
 // trie à bulle ~ 14 secondes
@@ -196,7 +205,34 @@ inline void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, f
   ( * flux_fichier) << " vmoyen = " << vmoy;
 }
 
+/*inline void algorithme(ofstream * flux_fichier, int n, int m, int ifirst, int ilast, float * eav, float * eap, float * epolar,float * x, float * v,int * name, float * tecr,float * tstop, float * dtsor, float * dti, float * tsor){
+
+  MPI_Status status;
+
+	MPI_Init(&argc,&argv);
+	MPI_Comm_rank(MPI_COMM_WORLD,&id);
+	MPI_Comm_size(MPI_COMM_WORLD,&p);
+
+  if()
+
+  while (abs(*tecr - *tstop) > *dtsor / 2.0) {
+    while (abs(*tecr - *tsor) > *dti / 2.0) {
+      avance(n, m, ifirst, ilast, *dti, eav, eap, epolar, x, v);
+
+      // partie MPI
+      triFusion(x,v,name,0,m-1);
+      //ordonne(ifirst,ilast,x,v,name);
+      *tecr += *dti;
+    }
+    wbande( flux_fichier, ifirst, ilast, *tecr, m, n, x, v, name);
+    *tsor += *dtsor;
+  }
+
+  MPI_Finalize();
+}*/
+
 inline void run(string fichier, int n) {
+  
   int m = n + 2;
   int ifirst = 1;
   int ilast = n + 1;
@@ -232,16 +268,20 @@ inline void run(string fichier, int n) {
   tecr += dti;
   tsor = tecr+dtsor;
 
-  while (abs(tecr - tstop) > dtsor / 2.0) {
+  algorithme( &flux_fichier, n, m, ifirst, ilast, & eav, & eap, & epolar, x, v, name, &tecr, &tstop, &dtsor, &dti, &tsor);
+
+  /*while (abs(tecr - tstop) > dtsor / 2.0) {
     while (abs(tecr - tsor) > dti / 2.0) {
       avance(n, m, ifirst, ilast, dti, & eav, & eap, & epolar, x, v);
+
+      // partie MPI
       triFusion(x,v,name,0,m-1);
       //ordonne(ifirst,ilast,x,v,name);
       tecr += dti;
     }
     wbande( & flux_fichier, ifirst, ilast, tecr, m, n, x, v, name);
     tsor += dtsor;
-  }
+  }*/
 
   flux_fichier << "\nFin du programme.\n";
   flux_fichier.close();
@@ -274,7 +314,7 @@ int main(void) {
 
   std::chrono::time_point<std::chrono::system_clock> start, end;
   start = std::chrono::system_clock::now();
-  string fichier = "resultat_test_tri_bulle.txt";
+  string fichier = "resultat_test_tri_fusion2.txt";
   int n = 10000;
 
   run(fichier, n);
@@ -285,3 +325,12 @@ int main(void) {
   
   return 0;
 }
+
+// mpicc test.cpp -o test
+// mpiexec -np 16 ./test
+
+// g++ -std=c++11 -Wall -Wextra -Werror -g test2.cpp -o test2
+
+// g++ -std=c++11 -Wall -Wextra -Werror -pg test.cpp -o test
+// gprof .out test < analysis.txt
+// valgrind --track-origins=yes ./test2
