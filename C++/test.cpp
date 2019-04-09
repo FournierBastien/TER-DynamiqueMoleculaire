@@ -9,9 +9,75 @@
 #include <chrono>
 #include <random>
 #include<algorithm>
-// #include <mpi.h>
+#include <mpi.h>
+#include <tuple>  
 
 using namespace std; 
+
+// on fusionne deux tableaux
+inline std::tuple<float*, float*, int*> merge(float *x,float * v, int * name, int Xsize, float *x_b,float * v_b, int * name_b, int X_bsize) {
+	int xi, x_bi, Ci, i;
+	int Csize = Xsize+X_bsize;
+
+	xi = 0; // cpt de x
+	x_bi = 0; // cpt de x_b
+	Ci = 0; // cpt de C,D,E
+
+  float y,z;
+  int w;
+
+	float *C = new float[Csize];
+  float* D = new float[Csize];
+  int* E = new int[Csize];
+
+	while ((xi < Xsize) && (x_bi < X_bsize)) {
+		if (x[Ci] <= x_b[x_bi]) {
+      C[Ci] = x[xi];
+      D[Ci] = v[xi];
+      E[Ci] = name[xi];
+			Ci++; xi++;
+		} else {
+			C[Ci] = x_b[x_bi];
+      D[Ci] = v_b[x_bi];
+      E[Ci] = name_b[x_bi];
+			Ci++; x_bi++;
+		}
+	}
+
+	if (xi >= Xsize){
+    for (i = Ci; i < Csize; i++, x_bi++){
+      C[i] = x_b[x_bi];
+      D[i] = v_b[x_bi];
+      E[i] = name_b[x_bi];
+    }
+		
+  }
+		
+	else if (x_bi >= X_bsize){
+    for (i = Ci; i < Csize; i++, xi++){
+      C[i] = x[xi];
+      D[i] = v[xi];
+      E[i] = name[xi];
+    }
+      
+  }
+		
+
+	for (i = 0; i < Xsize; i++){
+    x[i] = C[i];
+    v[i] = D[i];
+    name[i] = E[i];
+  }
+		
+
+	for (i = 0; i < X_bsize; i++){
+    x_b[i] = C[Xsize+i];
+    v_b[i] = D[Xsize+i];
+    name_b[i] = E[Xsize+i];
+  }
+
+  return  std::make_tuple(C,D,E);
+}
 
 inline void fusion(float * x, float * v, int * name, int start, int mid, int end) { 
 
@@ -50,12 +116,7 @@ inline void fusion(float * x, float * v, int * name, int start, int mid, int end
 inline void triFusion(float * x, float * v, int * name, int start, int end) 
 { 
 
-  MPI_Status status;
-
-	MPI_Init(&argc,&argv);
-	MPI_Comm_rank(MPI_COMM_WORLD,&id);
-	MPI_Comm_size(MPI_COMM_WORLD,&p);
-
+  
   // si le tableau est supérieur à un élément
   if (start < end) { 
 
@@ -205,31 +266,113 @@ inline void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, f
   ( * flux_fichier) << " vmoyen = " << vmoy;
 }
 
-/*inline void algorithme(ofstream * flux_fichier, int n, int m, int ifirst, int ilast, float * eav, float * eap, float * epolar,float * x, float * v,int * name, float * tecr,float * tstop, float * dtsor, float * dti, float * tsor){
+// implémentation de l'algorithme en version MPI
+inline void algorithme(ofstream * flux_fichier, int n, int m, int ifirst, int ilast, float * eav, float * eap, float * epolar,float * x, float * v,int * name, float * tecr,float * tstop, float * dtsor, float * dti, float * tsor){
+  int id,p;
+  int s = 0;
+  int y = m;
+  int step;
+	
 
-  MPI_Status status;
-
-	MPI_Init(&argc,&argv);
-	MPI_Comm_rank(MPI_COMM_WORLD,&id);
-	MPI_Comm_size(MPI_COMM_WORLD,&p);
-
-  if()
-
+  float * other_x = new float[y];
+  float * other_v = new float[y];
+  int* other_n = new int[y];
+  
   while (abs(*tecr - *tstop) > *dtsor / 2.0) {
     while (abs(*tecr - *tsor) > *dti / 2.0) {
       avance(n, m, ifirst, ilast, *dti, eav, eap, epolar, x, v);
-
-      // partie MPI
-      triFusion(x,v,name,0,m-1);
       //ordonne(ifirst,ilast,x,v,name);
+
+      int r;
+      s = m/p;
+      r = m%p;
+
+      float * x_c;
+      float * v_c;
+      int * n_c;
+
+      MPI_Status status;
+      MPI_Init(NULL,NULL);
+      MPI_Comm_rank(MPI_COMM_WORLD,&id);
+      MPI_Comm_size(MPI_COMM_WORLD,&p);
+      
+      if(id == 0){
+        // x_b = &x;
+        // v_b = &v;
+        // n_b = &name;
+        
+        // distributions de la taille des sous tableaux
+        MPI_Bcast(&s,1,MPI_INT,0,MPI_COMM_WORLD);
+        x_c = new float[s];
+        v_c = new float[s];
+        n_c = new int[s];
+
+        // distribution des données
+        MPI_Scatter(x,s,MPI_FLOAT,x_c,s,MPI_FLOAT,0,MPI_COMM_WORLD);
+        MPI_Scatter(v,s,MPI_FLOAT,v_c,s,MPI_FLOAT,1,MPI_COMM_WORLD);
+        MPI_Scatter(name,s,MPI_INT,n_c,s,MPI_INT,2,MPI_COMM_WORLD);
+
+        // le proc tri sa partie
+        triFusion(x_c,v_c,n_c,0,s-1);
+      }else{
+        MPI_Bcast(&s,1,MPI_INT,0,MPI_COMM_WORLD);
+        x_c = new float[s];
+        v_c = new float[s];
+        n_c = new int[s];
+
+        MPI_Scatter(x,s,MPI_FLOAT,x_c,s,MPI_FLOAT,0,MPI_COMM_WORLD);
+        MPI_Scatter(v,s,MPI_FLOAT,v_c,s,MPI_FLOAT,1,MPI_COMM_WORLD);
+        MPI_Scatter(name,s,MPI_INT,n_c,s,MPI_INT,2,MPI_COMM_WORLD);
+
+        triFusion(x_c,v_c,n_c,0,s-1);
+      }
+
+      step = 1;
+      while(step<p)
+      {
+        if(id%(2*step)==0)
+        {
+          // l'un reçoit
+          if(id+step<p)
+          {
+            MPI_Recv(&n,1,MPI_INT,id+step,0,MPI_COMM_WORLD,&status);
+            other_x = new float[y];
+            other_v = new float[y];
+            other_n = new int[y];
+            MPI_Recv(other_x,y,MPI_FLOAT,id+step,0,MPI_COMM_WORLD,&status);
+            MPI_Recv(other_v,y,MPI_FLOAT,id+step,1,MPI_COMM_WORLD,&status);
+            MPI_Recv(other_n,y,MPI_INT,id+step,2,MPI_COMM_WORLD,&status);
+
+            // on fusionne deux procs
+            tie(x_c,v_c,n_c) = merge(x_c,v_c,n_c,s,other_x,other_v,other_n,m);
+            s = s+m;
+          } 
+        }
+        // l'autre envoie
+        else
+        {
+          int near = id-step;
+          MPI_Send(&s,1,MPI_INT,near,0,MPI_COMM_WORLD);
+          MPI_Send(x_c,s,MPI_INT,near,0,MPI_COMM_WORLD);
+          MPI_Send(v_c,s,MPI_INT,near,1,MPI_COMM_WORLD);
+          MPI_Send(n_c,s,MPI_INT,near,2,MPI_COMM_WORLD);
+          break;
+        }
+        step = step*2;
+      }
+      // triFusion(x,v,name,0,m-1);
+      
+
+      MPI_Finalize();
+
       *tecr += *dti;
     }
     wbande( flux_fichier, ifirst, ilast, *tecr, m, n, x, v, name);
     *tsor += *dtsor;
   }
 
-  MPI_Finalize();
-}*/
+  
+}
 
 inline void run(string fichier, int n) {
   
@@ -244,6 +387,7 @@ inline void run(string fichier, int n) {
   float epolar = 0.0;
   float eav = 0.0;
   float eap = 0.0;
+
 
   float * x = new float[m];
   float * v = new float[m];
@@ -268,20 +412,20 @@ inline void run(string fichier, int n) {
   tecr += dti;
   tsor = tecr+dtsor;
 
-  algorithme( &flux_fichier, n, m, ifirst, ilast, & eav, & eap, & epolar, x, v, name, &tecr, &tstop, &dtsor, &dti, &tsor);
 
+  algorithme( &flux_fichier, n, m, ifirst, ilast, & eav, & eap, & epolar, x, v, name, &tecr, &tstop, &dtsor, &dti, &tsor);
   /*while (abs(tecr - tstop) > dtsor / 2.0) {
     while (abs(tecr - tsor) > dti / 2.0) {
       avance(n, m, ifirst, ilast, dti, & eav, & eap, & epolar, x, v);
 
       // partie MPI
-      triFusion(x,v,name,0,m-1);
+      // triFusion(x,v,name,0,m-1);
       //ordonne(ifirst,ilast,x,v,name);
       tecr += dti;
     }
     wbande( & flux_fichier, ifirst, ilast, tecr, m, n, x, v, name);
-    tsor += dtsor;
-  }*/
+    tsor += dtsor;*/
+  // }
 
   flux_fichier << "\nFin du programme.\n";
   flux_fichier.close();
@@ -314,7 +458,7 @@ int main(void) {
 
   std::chrono::time_point<std::chrono::system_clock> start, end;
   start = std::chrono::system_clock::now();
-  string fichier = "resultat_test_tri_fusion2.txt";
+  string fichier = "resultat_test_tri_fusion_mpi.txt";
   int n = 10000;
 
   run(fichier, n);

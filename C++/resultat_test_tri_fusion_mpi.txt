@@ -1,4 +1,4 @@
-simulation : resultat_test_tri_fusion2.txt 0.001 : pas de temps n = 10000 pvit = 100 tstop = 15 dtsor = 1 vmoyen = -0.0187645enregistrement a tecr=0#10002 10000 1 0-4999.5000000000 100.3686065674 0
+simulation : resultat_test_tri_fusion_mpi.txt 0.001 : pas de temps n = 10000 pvit = 100 tstop = 15 dtsor = 1 vmoyen = -0.0187645enregistrement a tecr=0#10002 10000 1 0-4999.5000000000 100.3686065674 0
 -4998.5000000000 74.0626144409 1
 -4997.5000000000 -50.7508964539 2
 -4996.5000000000 8.6401424408 3
