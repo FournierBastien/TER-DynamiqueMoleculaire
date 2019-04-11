@@ -133,7 +133,7 @@ inline void triFusion(float * x, float * v, int * name, int start, int end)
     fusion(x,v,name, start, m, end); 
   } 
 
-  MPI_Finalize();
+  // MPI_Finalize();
 } 
 
 // trie à bulle ~ 14 secondes
@@ -266,7 +266,7 @@ inline void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, f
   ( * flux_fichier) << " vmoyen = " << vmoy;
 }
 
-// implémentation de l'algorithme en version MPI
+// Essai implémentation de l'algorithme en version MPI
 inline void algorithme(ofstream * flux_fichier, int n, int m, int ifirst, int ilast, float * eav, float * eap, float * epolar,float * x, float * v,int * name, float * tecr,float * tstop, float * dtsor, float * dti, float * tsor){
   int id,p;
   int s = 0;
@@ -283,6 +283,11 @@ inline void algorithme(ofstream * flux_fichier, int n, int m, int ifirst, int il
       avance(n, m, ifirst, ilast, *dti, eav, eap, epolar, x, v);
       //ordonne(ifirst,ilast,x,v,name);
 
+      MPI_Status status;
+      MPI_Init(NULL,NULL);
+      MPI_Comm_rank(MPI_COMM_WORLD,&id);
+      MPI_Comm_size(MPI_COMM_WORLD,&p);
+
       int r;
       s = m/p;
       r = m%p;
@@ -291,10 +296,7 @@ inline void algorithme(ofstream * flux_fichier, int n, int m, int ifirst, int il
       float * v_c;
       int * n_c;
 
-      MPI_Status status;
-      MPI_Init(NULL,NULL);
-      MPI_Comm_rank(MPI_COMM_WORLD,&id);
-      MPI_Comm_size(MPI_COMM_WORLD,&p);
+      
       
       if(id == 0){
         // x_b = &x;
@@ -330,7 +332,7 @@ inline void algorithme(ofstream * flux_fichier, int n, int m, int ifirst, int il
       step = 1;
       while(step<p)
       {
-        if(id%(2*step)==0)
+        if(id % (2 * step) == 0)
         {
           // l'un reçoit
           if(id+step<p)
@@ -353,15 +355,15 @@ inline void algorithme(ofstream * flux_fichier, int n, int m, int ifirst, int il
         {
           int near = id-step;
           MPI_Send(&s,1,MPI_INT,near,0,MPI_COMM_WORLD);
-          MPI_Send(x_c,s,MPI_INT,near,0,MPI_COMM_WORLD);
-          MPI_Send(v_c,s,MPI_INT,near,1,MPI_COMM_WORLD);
+          MPI_Send(x_c,s,MPI_FLOAT,near,0,MPI_COMM_WORLD);
+          MPI_Send(v_c,s,MPI_FLOAT,near,1,MPI_COMM_WORLD);
           MPI_Send(n_c,s,MPI_INT,near,2,MPI_COMM_WORLD);
           break;
         }
         step = step*2;
       }
       // triFusion(x,v,name,0,m-1);
-      
+      // MPI_Barrier(MPI_COMM_WORLD);
 
       MPI_Finalize();
 
@@ -370,8 +372,6 @@ inline void algorithme(ofstream * flux_fichier, int n, int m, int ifirst, int il
     wbande( flux_fichier, ifirst, ilast, *tecr, m, n, x, v, name);
     *tsor += *dtsor;
   }
-
-  
 }
 
 inline void run(string fichier, int n) {
@@ -445,7 +445,7 @@ inline void generate(){
   flux_fichier.open("random_values.txt");
 
   default_random_engine generator;
-  uniform_real_distribution<double> distribution(0.0,1.0);
+  uniform_real_distribution<float> distribution(0.0,1.0);
 
   for( int i = 0; i < n; i++){
     flux_fichier << distribution(generator) << "\n";
@@ -466,11 +466,12 @@ int main(void) {
   end = std::chrono::system_clock::now();
   int temps_ecoule = std::chrono::duration_cast<std::chrono::seconds>(end-start).count();
   cout << "Temps écoulé : " << temps_ecoule << " secondes"<< endl;
-  
+
   return 0;
 }
 
 // mpicc test.cpp -o test
+// mpic++ test.cpp -o test
 // mpiexec -np 16 ./test
 
 // g++ -std=c++11 -Wall -Wextra -Werror -g test2.cpp -o test2
