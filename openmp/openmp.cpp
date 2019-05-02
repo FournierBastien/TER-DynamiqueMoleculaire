@@ -11,7 +11,9 @@
 #include<algorithm>
 #include <mpi.h>
 #include <tuple> 
-#include <numeric>   
+#include <numeric>
+#include <omp.h>
+#define NUM_THREADS 4
 
 using namespace std; 
 
@@ -76,12 +78,19 @@ inline void avance(int n, int m, int ifirst, int ilast, float dti, float * eav, 
   // calcul de l'accélération
   * eav = * epolar + 0.5 * n;
 
+#pragma omp parallel 
+{
+#pragma omp for 
   for (int i = ifirst; i <= ilast; i++) {
     * eap = * eav - 1.0;
     a[i] = 0.5 * ( * eav + * eap);
     * eav = * eap;
   }
-//#pragma omp parallel for 
+  }
+  
+#pragma omp parallel 
+{
+#pragma omp for 
   for (int i = ifirst; i <= ilast; i++) {
     E = a[i];
     AA = ((x[i] + E + r2 * v[i]) * exp(r2 * dti));
@@ -100,6 +109,7 @@ inline void avance(int n, int m, int ifirst, int ilast, float dti, float * eav, 
       x[i] = x[m-1] + x[i] - x[0];
     }
 
+  }
   }
 
   delete[] a;
@@ -129,7 +139,9 @@ inline void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, f
 
   v[m-1] = 0;
   name[m-1] = 0;
-#pragma omp parallel for 
+#pragma omp parallel 
+{
+#pragma omp for 
   for (int i = ifirst; i <= ilast; i++) {
     name[i] = i - 1;
     x[i] = x[0] + 0.5 + i - ifirst;
@@ -137,6 +149,7 @@ inline void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, f
     //( * v)[i] = 2.0 * pvit * (0.5e0 - rand());
     mi[i] = 1.0;
     ma[i] = 1.0;
+  }
   }
 
   // calage du barycentre a zero avec une vitesse moyenne nulle
@@ -149,8 +162,12 @@ inline void init(ofstream * flux_fichier, int m, int n, int ifirst, int ilast, f
  
   vmoy = vmoy / n;
 
+#pragma omp parallel 
+{
+#pragma omp for 
   for (int i = ifirst; i <= ilast; i++) {
     v[i] -= vmoy;
+  }
   }
 
   vmoy= accumulate(v,v+size,0.0f);
