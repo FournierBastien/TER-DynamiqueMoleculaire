@@ -8,6 +8,7 @@ from math import sqrt, exp
 import numpy
 import time
 import random
+#import pf
 
 # Specification du dossier de travail
 #os.chdir("/media/mcd/MCD/M1Informatique/S2/TER/DynamiqueMoleculaire/Code_&_Resultat/Test")
@@ -27,8 +28,9 @@ class Univexp():
 
 		self.tecr = self.tecr + self.dti
 		self.tsor = self.tecr + self.dtsor
-
+		#print("tecr=",self.tecr)
 		while abs(self.tecr -self.tstop) > self.dtsor / 2.:
+			#print("abs(tecr-tstop)=",abs(self.tecr -self.tstop),"dtsor/2.=",self.dtsor / 2.)
 			while abs(self.tecr -self.tsor) > self.dti / 2.:
 				self.avance()
 				self.ordonne()
@@ -49,7 +51,7 @@ class Univexp():
 		#AA=BB=E=0.
 		
 		#calcul de l'acceleration
-		a = numpy.zeros((self.m), dtype='d')
+		a =[0] * self.m# numpy.zeros((self.m), dtype='d')
 		self.eav = self.epolar + 0.5 * self.n
 		for i in range(self.ifirst, self.ilast):
 			#eap = eav - self.gravplas * self.ma[i]
@@ -59,6 +61,9 @@ class Univexp():
 			self.eav = self.eap
 
 		#les particules avancent de dti
+		#for i in self.x:
+			#print("x0=",i)
+		#print("E0=",E,"AA0=",AA,"BB0=",BB,"dti0=",self.dti,"r20=",r2)
 		for i in range(self.ifirst, self.ilast):
 			#plt.scatter(self.x, self.v)
 			#plt.pause(0.01)
@@ -86,6 +91,8 @@ class Univexp():
     #************************************************************************************************
 
 	def ordonne(self):
+		"""pf.univexp.ordonne
+		#print('ordonne ok')"""
 		
 		i=j=k=np=0
 
@@ -115,7 +122,7 @@ class Univexp():
 			#self.ma[j]=map
 			self.name[j]=np
     
-    #************************************************************************************************
+   #************************************************************************************************
 
 	def wbande(self):
 		print("enregistrement a tecr = {:7.3f}".format(self.tecr))
@@ -135,17 +142,22 @@ class Univexp():
 		self.ifirst = 1
 		self.ilast=self.n + 1
 		self.dti = 0.001
-		self.dtsor = .1
-		self.tstop = 1.
+		self.dtsor = 1.
+		self.tstop = 15.
 		self.gravplas=1.
 		self.pvit = 100.
 
 		#allocation pour les tableaux
-		self.x = numpy.zeros((self.m), dtype='d')
+		"""self.x = numpy.zeros((self.m), dtype='d')
 		self.v = numpy.zeros((self.m), dtype='d')
 		self.mi = numpy.zeros((self.m), dtype='d')
 		self.ma = numpy.zeros((self.m), dtype='d')
-		self.name = numpy.zeros((self.m), dtype='l')
+		self.name = numpy.zeros((self.m), dtype='l')"""
+		self.x = [0] * self.m
+		self.v = [0] * self.m
+		self.mi = [0] * self.m
+		self.ma = [0] * self.m
+		self.name = [0] * self.m
 
 
 		print("simulation :",self.fichier)
@@ -159,6 +171,7 @@ class Univexp():
 		self.mi[0] = 0
 		self.ma[0] = 0
 		self.name[0] = 0
+
 		self.x[self.m-1] = 0.5*self.n
 		self.v[self.m-1] = 0
 		self.mi[self.m-1] = 0
@@ -205,8 +218,10 @@ def main() :
 	# Affichage du temps d execution
 	print("Temps d execution : %s secondes" % (time.time() - start_time))
 
-import cProfile
+main()
+"""import cProfile
 import re
-cProfile.run('main()')
+cProfile.run('main()')"""
 
+#cProfile.run('re.compile("foo|bar")', 'restats')
 exit()
