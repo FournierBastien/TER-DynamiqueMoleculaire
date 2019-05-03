@@ -4,3 +4,7 @@ MPI -> encore qu'une ébauche, les deux boucles while ont été remplacées par 
 
 
 Séquentiel -> les valeurs de départ dérives légèrement au niveau des chiffres après la virgules, et les données diffèrent de plus en plus à chaque itération de l'algorithme.
+
+
+
+gprof2dot -> permet de visualiser sous forme graphique le profiler de l'algorithme séquentiel, le profil du Tri bulle et du Tri Fusion ont été générés.
