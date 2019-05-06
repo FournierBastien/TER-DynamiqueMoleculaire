@@ -1,0 +1,70 @@
+Python n'étant pas un langage compilé, le code s'exécute plus lentement qu'un code en C ou en Fortran ...
+
+Numpy arrive à faire descendre le facteur de 700 à un peu moins de 40 ce qui reste encore énorme ... 
+
+Un code qui s'exécute en 90 secondes en Fortran met environ une heure en utilisant Numpy et 1 jour et demi en Python pur
+
+Pour le while mon exemple avec range te montre que l'utilisation d'un build in est plus rapide.
+
+Python possède un certain nombre d’avantages :
+• Langage simple, interprété avec une syntaxe claire.
+• Facile à programmer et la gestion de la mémoire est
+automatique.
+• Open source, gratuit et portable.
+• Dispose de nombreux modules pour le calcul scientifique.
+Il est néanmoins trop lent pour les taches numériques
+intensives. Dans ce cas on peut l’interfacer avec C ou Fortran.
+Cette technique permet d’utiliser le meilleur des deux
+mondes :
+• Taches de pré et post-traitement en Python.
+• Parties numériques intensives en Fortran (ou C)
+f2py, Pierre Navaro, ANGD Python, Autrans 6-10 décembre 2010
+f2py
+f2py nécessite l’installation de Numpy et trois méthodes pour
+créer une interface sont proposées :
+• Interfacer des subroutines simples sans écrire de code
+supplémentaire.
+• Ajouter des directives pour f2py dans le source Fortran
+pour un interfaçage plus complexe.
+• Écrire un fichier d’interface décrivant les subroutines et
+les données à interfacer. f2py génère automatiquement
+un fichier d’interface simple qu’on peut ensuite éditer et
+modifier.
+
+
+Profiler
+Lorsqu'on ne sait pas par où commencer pour accélérer son code, on peut utiliser profiler. C'est un outil qui espionne les fonctions pour compter le nombre d'appels, et le temps d'exécution. Il permet de détecter les parties du programme les plus exécutés
+
+Le programme est évidemment plus lent mais il enregistre les temps d'exécution de chaque fonction :
+
+La première ligne indique que 197 appels ont été surveillés. Parmi ces appels, 192 étaient primitifs , ce qui signifie que l'appel n'a pas été induit via la récursivité. La ligne suivante:, indique que la chaîne de texte dans la colonne la plus à droite a été utilisée pour trier la sortie. Les en-têtes de colonne comprennent:Ordered by: standard name
+
+ncalls:appels
+pour le nombre d'appels,
+
+tottime
+pour le temps total passé dans la fonction donnée (et à l'exclusion du temps passé dans les appels aux sous-fonctions)
+percall
+est le quotient de tottimedivisé parncalls
+cumtime
+est le temps cumulé passé dans cette sous-fonction et dans toutes les sous-fonctions (de l'invocation jusqu'à la sortie). Ce chiffre est précis même pour les fonctions récursives.
+
+percall
+est le quotient de cumtimediviser par des appels primitifs
+
+filename:lineno(function)
+fournit les données respectives de chaque fonction
+Quand il y a deux nombres dans la première colonne (par exemple 3/1), cela signifie que la fonction est récursive. La seconde valeur correspond au nombre d'appels primitifs et la première au nombre total d'appels. Notez que lorsque la fonction ne recurse pas, ces deux valeurs sont identiques et seul le chiffre unique est imprimé.
+
+tier= 0.3333333333333333 python
+
+tier= 0.33333334326744079590 f90
+
+
+J'ai implemente le tri par insertion ainsi que le tri par fusion mais mais j'ai un probleme au niveau de la tri par fusion a savoir je n'arrive pas a trier les deux autres tableaux( v et name) en fonction du tableau x,
+
+J'ai essayé d'implementer le multithreading mais j'ai eu des bugs que j'ai pas encore puis corriger;
+
+J'avais aussi travaillé sur l'utilisation du code fortran dans celui de python afin d'utliser la fonction avance de fortran dans le code python car celui du python prend assez de temps d'apres profiler 
+
+A partie de la ligne 826 a la 9/16
