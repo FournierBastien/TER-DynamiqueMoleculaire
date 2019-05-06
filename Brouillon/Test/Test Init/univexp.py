@@ -34,8 +34,8 @@ class Univexp():
                 #print("x={:10.19f}",self.x)
                 self.ordonne()
                 self.tecr = self.tecr + self.dti
-                #plt.scatter(self.x, self.v)
-                #plt.pause(0.01)
+                plt.scatter(self.x, self.v)
+                plt.pause(0.01)
             self.wbande()
             self.tsor = self.tsor + self.dtsor
 
@@ -271,7 +271,7 @@ def main() :
     # Debut du decompte du temps
     start_time = time.time()
     Univexp()
-    #plt.show()
+    plt.show()
     # Affichage du temps d execution
     print("Temps d execution : %s secondes ---" % (time.time() - start_time))
 

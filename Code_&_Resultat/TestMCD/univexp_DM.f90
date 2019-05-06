@@ -9,7 +9,7 @@ program univexp
  real, dimension(:), allocatable :: x,v,mi,ma
  integer, dimension(:), allocatable :: name
  t1= dtime(temps) ! récupération du temps système avant calcul
- n=1000
+ n=10
  fichier='univexp01'
 
  call init
@@ -189,7 +189,7 @@ contains
  v(ifirst:ilast)=v(ifirst:ilast)-vmoy
  vmoy=sum(v(ifirst:ilast))
  write(*,'(" vmoyen =",f7.3)')vmoy
- write(*,'(" x=",f25.20)')x
+ !write(*,'(" x=",f25.20)')x
  return
  end subroutine init
 !************************************************************************

@@ -17,7 +17,7 @@ class Univexp():
 	fichier="univexp01"
 	tecr=0.
 	tsor=0.
-	n=1000
+	n=10
 
 	def __init__(self):
 		self.tab1=[]
@@ -29,14 +29,18 @@ class Univexp():
 
 		self.tecr = self.tecr + self.dti
 		self.tsor = self.tecr + self.dtsor
-
+		self.i=1
 		while abs(self.tecr -self.tstop) > self.dtsor / 2.:
 			while abs(self.tecr -self.tsor) > self.dti / 2.:
 				self.avance()
+				plt.scatter(self.x, self.v)
+				#plt.plot(self.x, self.v)
+				plt.savefig('images_plot/plot'+str(self.i)+'.png')
+				plt.show(block=False)
+				self.i+=1
+				plt.pause(0.01)
 				self.ordonne()
 				self.tecr = self.tecr + self.dti
-				#plt.scatter(self.x, self.v)
-				#plt.pause(0.01)
 			self.wbande()
 			self.tsor = self.tsor + self.dtsor
 
@@ -44,6 +48,7 @@ class Univexp():
 		print ("fin de programme.")
         
     #************************************************************************************************
+
 
 	def avance(self):
 		r2 = -sqrt(2.)
@@ -62,6 +67,7 @@ class Univexp():
 
 		#les particules avancent de dti
 		for i in range(self.ifirst, self.ilast):
+
 			#plt.scatter(self.x, self.v)
 			#plt.pause(0.01)
 			E = a[i]
@@ -268,7 +274,6 @@ def main() :
 	# Debut du decompte du temps
 	start_time = time.time()
 	Univexp()
-	#plt.show()
 	# Affichage du temps d execution
 	print("Temps d execution : %s secondes" % (time.time() - start_time))
 main()
