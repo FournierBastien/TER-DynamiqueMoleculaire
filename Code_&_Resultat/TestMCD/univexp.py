@@ -8,7 +8,7 @@ from math import sqrt, exp
 import numpy as np
 import time
 import random
-
+sys.setrecursionlimit(99999999)
 # Specification du dossier de travail
 #os.chdir("/media/mcd/MCD/M1Informatique/S2/TER/DynamiqueMoleculaire/Code_&_Resultat/Test")
 
@@ -17,7 +17,7 @@ class Univexp():
 	fichier="univexp01"
 	tecr=0.
 	tsor=0.
-	n=100
+	n=1000
 
 	def __init__(self):
 		self.tab1=[]
@@ -33,9 +33,7 @@ class Univexp():
 		while abs(self.tecr -self.tstop) > self.dtsor / 2.:
 			while abs(self.tecr -self.tsor) > self.dti / 2.:
 				self.avance()
-				self.tri_ins(self.x,self.v,self.name)
-				#self.tri_fusion(self.x,self.v,self.name)
-				#self.ordonne()
+				self.ordonne()
 				self.tecr = self.tecr + self.dti
 				#plt.scatter(self.x, self.v)
 				#plt.pause(0.01)
@@ -102,57 +100,44 @@ class Univexp():
 			t1[j]=temp1
 			t2[j]=temp2
 			t3[j]=temp3
+		return [t1,t2,t3]
 
-	def tri_fusion(self,t1,t2,t3):
-		n=len(t1)
-		if n<2:
-			t=(t1,t2,t3)
-			return t
+	
+
+	def fusion(self,T1,T2):
+		if T1==[] :
+			return T2
+		if T2==[]:
+			return T1
+		if T1[0][0]<T2[0][0]:
+			return [T1[0]]+self.fusion(T1[1 :],T2)
 		else:
-			m=n//2
-			return self.fusion(self.tri(t1[:m],t2[:m],t3[:m]),self.tri(t1[m:],t2[m:],t3[m:]))
-		self.x,self.v,self.name=self.tab1,self.tab2,self.tab3
+			return [T2[0]]+self.fusion(T1,T2[1 :])
+				
+	def tri_fusion(self,T):
+		if len(T)<2:
+			return T
+		n=len(T)
 
-
-
-
-	def fusion(self,l1,l2):
-		if l1 is not None:
-			if l1[0]==[]:
-				self.tab1+=l2[0]
-				self.tab2+=l2[1]
-				self.tab3+=l2[2]
-				self.tri_ins(self.tab1,self.tab2,self.tab3)
-				return l2[0],l2[1],l2[2]
-			elif l2[0]==[]:
-				self.tab1+=l1[0]
-				self.tab2+=l1[1]
-				self.tab3+=l1[2]
-				self.tri_ins(self.tab1,self.tab2,self.tab3)
-				return l1[0],l1[1],l1[2]
-
-			elif l1[0][0]<l2[0][0]:
-				self.tab1=l1[0]+self.tab1
-				self.tab2=l1[1]+self.tab2
-				self.tab3=l1[2]+self.tab3
-				self.tri_ins(self.tab1,self.tab2,self.tab3)
-				return self.fusion((l1[0][1:],l1[1][1:],l1[2][1:]),(l2[0],l2[1],l2[2]))
-
-			else:
-				#print ("Else tab1=",tab1,"l1[0]=",l1[0])
-				self.tab1=l2[0]+self.tab1
-				self.tab2=l2[1]+self.tab2
-				self.tab3=l2[2]+self.tab3
-				self.tri_ins(self.tab1,self.tab2,self.tab3)
-				return self.fusion((l1[0],l1[1],l1[2]),(l2[0][1:],l2[1][1:],l2[2][1:]))
-		self.x,self.v,self.name=self.tab1,self.tab2,self.tab3
-
-
+		return self.fusion(self.tri_fusion(T[:n//2]),self.tri_fusion(T[n//2:]))
  #************************************************************************************************
 
 	def ordonne(self):
-		self.tri(self.x,self.v,self.name)
-		self.x,self.v,self.name=self.tab1,self.tab2,self.tab3
+		T=[]
+		for i in range(self.ifirst, self.ilast):
+			T.append([self.x[i],self.v[i],self.name[i]])
+
+		T = self.tri_fusion(T)
+		
+		for i in range(self.ifirst, self.ilast):
+			self.x[i],self.v[i],self.name[i]=T[i-1][0],T[i-1][1],T[i-1][2]
+
+
+
+		"""T=tri_ins(self,t1,t2,t3)[
+		self.x,self.v,self.name=T[0],T[1],T[2]"""
+
+
 		"""i=j=k=np=0
 
 		xp=vp=mip=map=0.

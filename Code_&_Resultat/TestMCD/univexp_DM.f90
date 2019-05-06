@@ -9,7 +9,7 @@ program univexp
  real, dimension(:), allocatable :: x,v,mi,ma
  integer, dimension(:), allocatable :: name
  t1= dtime(temps) ! récupération du temps système avant calcul
- n=100
+ n=1000
  fichier='univexp01'
 
  call init
