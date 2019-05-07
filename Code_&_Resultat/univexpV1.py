@@ -17,7 +17,7 @@ class Univexp():
 	fichier="univexp01"
 	tecr=0.
 	tsor=0.
-	n=10
+	n=100
 
 	def __init__(self):
 		self.tab1=[]
@@ -33,12 +33,12 @@ class Univexp():
 		while abs(self.tecr -self.tstop) > self.dtsor / 2.:
 			while abs(self.tecr -self.tsor) > self.dti / 2.:
 				self.avance()
-				plt.scatter(self.x, self.v)
+				#plt.scatter(self.x, self.v)
 				#plt.plot(self.x, self.v)
-				plt.savefig('images_plot/plot'+str(self.i)+'.png')
-				plt.show(block=False)
-				self.i+=1
-				plt.pause(0.01)
+				#plt.savefig('images_plot/plot'+str(self.i)+'.png')
+				#plt.show(block=False)
+				#self.i+=1
+				#plt.pause(0.01)
 				self.ordonne()
 				self.tecr = self.tecr + self.dti
 			self.wbande()
@@ -276,9 +276,8 @@ def main() :
 	Univexp()
 	# Affichage du temps d execution
 	print("Temps d execution : %s secondes" % (time.time() - start_time))
-main()
-"""import cProfile
+import cProfile
 import re
-cProfile.run('main()')"""
+cProfile.run('main()')
 
 exit()
